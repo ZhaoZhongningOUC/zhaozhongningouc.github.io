@@ -5,7 +5,7 @@
     <loc>https://zhaozhongningouc.github.io/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://zhaozhongningouc.github.io/" />
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://zhaozhongningouc.github.io/zh/" />
-    <lastmod>2026-07-18</lastmod>
+    <lastmod>2026-07-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -13,8 +13,56 @@
     <loc>https://zhaozhongningouc.github.io/zh/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://zhaozhongningouc.github.io/" />
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://zhaozhongningouc.github.io/zh/" />
-    <lastmod>2026-07-18</lastmod>
+    <lastmod>2026-07-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://zhaozhongningouc.github.io/work/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://zhaozhongningouc.github.io/work/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://zhaozhongningouc.github.io/zh/work/" />
+    <lastmod>2026-07-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://zhaozhongningouc.github.io/zh/work/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://zhaozhongningouc.github.io/work/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://zhaozhongningouc.github.io/zh/work/" />
+    <lastmod>2026-07-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://zhaozhongningouc.github.io/research/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://zhaozhongningouc.github.io/research/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://zhaozhongningouc.github.io/zh/research/" />
+    <lastmod>2026-07-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://zhaozhongningouc.github.io/zh/research/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://zhaozhongningouc.github.io/research/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://zhaozhongningouc.github.io/zh/research/" />
+    <lastmod>2026-07-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://zhaozhongningouc.github.io/experience/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://zhaozhongningouc.github.io/experience/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://zhaozhongningouc.github.io/zh/experience/" />
+    <lastmod>2026-07-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://zhaozhongningouc.github.io/zh/experience/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://zhaozhongningouc.github.io/experience/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://zhaozhongningouc.github.io/zh/experience/" />
+    <lastmod>2026-07-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
 </urlset>
