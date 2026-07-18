@@ -22,7 +22,7 @@ export const siteContent = {
   person: {
     name: "Jonny",
     portrait: "/assets/images/portrait.jpg",
-    email: "zhaozn_ouc@163.com",
+    email: "zhaozhn@sugon.com",
     location: { en: "China", zh: "中国" },
     role: {
       en: "OneScience Work Coordination & Earth Science R&D",
@@ -41,10 +41,6 @@ export const siteContent = {
       {
         label: { en: "OneScience", zh: "OneScience" },
         url: "https://gitee.com/onescience-ai/onescience",
-      },
-      {
-        label: { en: "ResearchGate", zh: "ResearchGate" },
-        url: "https://www.researchgate.net/profile/Zhao-Zhongning",
       },
     ],
   },
