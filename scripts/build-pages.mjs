@@ -27,7 +27,7 @@ const text = (value, lang) => {
 
 const pagePath = (page, lang) => {
   const suffix = page === "home" ? "" : `${page}/`;
-  return lang === "zh" ? `/zh/${suffix}` : `/${suffix}`;
+  return lang === "en" ? `/en/${suffix}` : `/${suffix}`;
 };
 
 const pageFile = (page, lang) => {
@@ -35,30 +35,37 @@ const pageFile = (page, lang) => {
   return resolve(projectRoot, route, "index.html");
 };
 
+const legacyChinesePath = (page) => {
+  const suffix = page === "home" ? "" : `${page}/`;
+  return `/zh/${suffix}`;
+};
+
+const legacyChineseFile = (page) => resolve(projectRoot, legacyChinesePath(page).replace(/^\//, ""), "index.html");
+
 const pageMeta = {
   home: {
     title: content.meta.title,
     description: content.meta.description,
   },
   work: {
-    title: { en: "Work — Jonny", zh: "工作 — Jonny" },
+    title: { en: "Work — Jonny", zh: "工作｜Jonny" },
     description: {
       en: "Jonny’s current work on OneScience, Earth-system AI, and heterogeneous high-performance scientific software.",
-      zh: "Jonny 当前在 OneScience、地球科学智能与异构高性能科学软件方向的工作。",
+      zh: "Jonny 目前负责 OneScience 整体推进，并开展气象海洋 AI4S 与异构高性能软件研发。",
     },
   },
   research: {
-    title: { en: "Research — Jonny", zh: "研究 — Jonny" },
+    title: { en: "Research — Jonny", zh: "研究｜Jonny" },
     description: {
       en: "Selected research, publications, and patents in marine spatiotemporal intelligence and multi-source data fusion.",
-      zh: "海洋时空智能与多源数据融合方向的代表研究、论文与专利。",
+      zh: "聚焦海洋时空智能与多源数据融合的代表性研究、学术论文和发明专利。",
     },
   },
   experience: {
-    title: { en: "Experience — Jonny", zh: "经历 — Jonny" },
+    title: { en: "Experience — Jonny", zh: "经历｜Jonny" },
     description: {
       en: "Jonny’s work, education, research programs, and selected recognition.",
-      zh: "Jonny 的工作经历、教育背景、科研项目与代表荣誉。",
+      zh: "Jonny 的工作经历、教育背景、科研项目和荣誉奖励。",
     },
   },
 };
@@ -97,28 +104,28 @@ const labels = {
     menu: "菜单",
     close: "关闭",
     language: "EN",
-    languageLabel: "Switch to English",
-    current: "当前",
-    email: "邮箱",
+    languageLabel: "切换到英文版",
+    current: "重点项目",
+    email: "邮件联系",
     github: "GitHub",
     repository: "OneScience 仓库",
     overview: "项目概览",
-    role: "我的职责",
-    focus: "工作方向",
-    domains: "覆盖领域",
-    selectedResearch: "代表研究",
-    publications: "论文",
+    role: "我的工作",
+    focus: "重点方向",
+    domains: "覆盖方向",
+    selectedResearch: "代表性研究",
+    publications: "学术论文",
     journals: "期刊论文",
     conferences: "会议论文",
-    patents: "专利",
+    patents: "专利成果",
     workExperience: "工作经历",
     education: "教育经历",
     programs: "科研项目",
-    recognition: "代表荣誉",
+    recognition: "荣誉奖励",
     present: "至今",
     pageIntroWork: "当前工作",
-    pageIntroResearch: "研究成果",
-    pageIntroExperience: "个人履历",
+    pageIntroResearch: "学术研究",
+    pageIntroExperience: "个人经历",
   },
 };
 
@@ -196,10 +203,10 @@ const homePage = (lang) => {
             <p class="eyebrow">${escapeHtml(text(content.hero.eyebrow, lang))}</p>
             <h1 id="home-title">Jonny<span aria-hidden="true">.</span></h1>
             <p class="home-headline">${escapeHtml(text(content.hero.headline, lang))}</p>
-            <p class="home-summary">${escapeHtml(text(content.hero.summary, lang))} ${escapeHtml(text(content.hero.education, lang))}</p>
-            <div class="home-meta" aria-label="${lang === "en" ? "Current profile" : "当前信息"}">
+            <p class="home-summary">${escapeHtml(text(content.hero.summary, lang))}</p>
+            <div class="home-meta" aria-label="${lang === "en" ? "Current profile" : "基本信息"}">
               <span><strong>${escapeHtml(text(content.person.organization, lang))}</strong> · OneScience</span>
-              <span><strong>${lang === "en" ? "OUC" : "中国海洋大学"}</strong> · ${lang === "en" ? "Ph.D. 2024" : "博士 2024"}</span>
+              <span><strong>${lang === "en" ? "OUC" : "中国海洋大学"}</strong> · ${lang === "en" ? "Ph.D. 2024" : "博士（2024）"}</span>
             </div>
             <div class="home-actions">
               <a class="primary-link" href="mailto:${escapeHtml(content.person.email)}">${copy.email}<span aria-hidden="true">↗</span></a>
@@ -208,10 +215,10 @@ const homePage = (lang) => {
             </div>
           </div>
           <figure class="home-portrait">
-            <img src="${content.person.portrait}" alt="${lang === "en" ? "Portrait of Jonny" : "Jonny 的个人肖像"}" width="480" height="600" fetchpriority="high">
+            <img src="${content.person.portrait}" alt="${lang === "en" ? "Portrait of Jonny" : "Jonny 个人照片"}" width="480" height="600" fetchpriority="high">
           </figure>
         </section>
-        <nav class="route-grid" aria-label="${lang === "en" ? "Explore the résumé" : "浏览个人履历"}">
+        <nav class="route-grid" aria-label="${lang === "en" ? "Explore the résumé" : "查看详细经历"}">
           ${routeLinks}
         </nav>
       </div>
@@ -260,8 +267,10 @@ const workPage = (lang) => {
     <main id="main-content">
       ${pageHeading({
         eyebrow: copy.pageIntroWork,
-        title: lang === "en" ? "Software for science, built to be used." : "让科学智能软件真正可用。",
-        intro: text(content.hero.summary, lang),
+        title: lang === "en" ? "Software for science, built to be used." : "围绕科研需求，研发易用、可复用的 AI4S 软件。",
+        intro: lang === "en"
+          ? text(content.hero.summary, lang)
+          : "当前工作主要围绕 AI4S 框架建设、气象海洋模型研发和异构计算平台适配。",
         lang,
       })}
       <div class="container resume-content">
@@ -296,7 +305,7 @@ const selectedResearch = (lang) =>
             <h3>${escapeHtml(project.title)}</h3>
             <p class="research-row__title">${escapeHtml(project.fullTitle)}</p>
             <p>${escapeHtml(text(project.summary, lang))}</p>
-            <p class="research-result"><strong>${escapeHtml(project.metric.value)}</strong> ${escapeHtml(text(project.metric.label, lang))}</p>
+            <p class="research-result"><strong>${escapeHtml(text(project.metric.value, lang))}</strong> ${escapeHtml(text(project.metric.label, lang))}</p>
             <div class="section-links">${project.links.map((link) => externalLink(link.url, text(link.label, lang))).join("")}</div>
           </div>
         </article>`,
@@ -333,10 +342,10 @@ const researchPage = (lang) => {
     <main id="main-content">
       ${pageHeading({
         eyebrow: copy.pageIntroResearch,
-        title: lang === "en" ? "From ocean data to measurable research systems." : "从海洋数据到可验证的研究系统。",
+        title: lang === "en" ? "From ocean data to measurable research systems." : "围绕海洋时空数据开展建模、轨迹重建与分布预测。",
         intro: lang === "en"
           ? "My academic work focuses on multi-source ocean data, vessel trajectories, and fishing-effort forecasting."
-          : "我的学术研究聚焦多源海洋数据、渔船轨迹与捕捞努力量预测。",
+          : "我的学术研究主要围绕多源海洋数据融合、渔船轨迹重建和捕捞努力量分布预测展开。",
         lang,
       })}
       <div class="container resume-content">
@@ -385,10 +394,10 @@ const experiencePage = (lang) => {
     <main id="main-content">
       ${pageHeading({
         eyebrow: copy.pageIntroExperience,
-        title: lang === "en" ? "A continuous path from ocean research to AI4S." : "从海洋研究走向科学智能。",
+        title: lang === "en" ? "A continuous path from ocean research to AI4S." : "从海洋数据研究到 AI4S 软件研发。",
         intro: lang === "en"
           ? "Work, education, research programs, and selected recognition."
-          : "工作经历、教育背景、科研项目与代表荣誉。",
+          : "这里整理了我的工作经历、教育背景、科研项目和荣誉奖励。",
         lang,
       })}
       <div class="container resume-content">
@@ -398,7 +407,7 @@ const experiencePage = (lang) => {
         })}
         ${section({
           label: copy.education,
-          body: `<div class="section-logo section-logo--ouc"><img src="/assets/images/ouc-logo.jpg" alt="${lang === "en" ? "Ocean University of China logo" : "中国海洋大学 Logo"}"></div>${timelineRows(content.journey.slice(1), lang)}`,
+          body: `<div class="section-logo section-logo--ouc"><img src="/assets/images/ouc-logo.jpg" alt="${lang === "en" ? "Ocean University of China logo" : "中国海洋大学标识"}"></div>${timelineRows(content.journey.slice(1), lang)}`,
         })}
         ${section({ label: copy.programs, body: `<div class="program-list">${programRows}</div>` })}
         ${section({ label: copy.recognition, body: `<div class="award-list">${awardRows}</div>` })}
@@ -432,9 +441,7 @@ const structuredData = (page, lang, canonical) => {
 
 const documentTemplate = (page, lang, body) => {
   const languageTag = lang === "zh" ? "zh-CN" : "en";
-  const alternateLang = lang === "en" ? "zh" : "en";
   const canonical = `${siteOrigin}${pagePath(page, lang)}`;
-  const alternate = `${siteOrigin}${pagePath(page, alternateLang)}`;
   const title = text(pageMeta[page].title, lang);
   const description = text(pageMeta[page].description, lang);
 
@@ -450,7 +457,7 @@ const documentTemplate = (page, lang, body) => {
     <link rel="canonical" href="${canonical}">
     <link rel="alternate" hreflang="en" href="${siteOrigin}${pagePath(page, "en")}">
     <link rel="alternate" hreflang="zh-CN" href="${siteOrigin}${pagePath(page, "zh")}">
-    <link rel="alternate" hreflang="x-default" href="${siteOrigin}${pagePath(page, "en")}">
+    <link rel="alternate" hreflang="x-default" href="${siteOrigin}${pagePath(page, "zh")}">
     ${page === "home" ? '<link rel="preload" href="/assets/images/portrait.jpg" as="image" type="image/jpeg">' : ""}
     <link rel="stylesheet" href="/assets/css/styles.css">
     <meta property="og:type" content="website">
@@ -478,6 +485,29 @@ const documentTemplate = (page, lang, body) => {
 `;
 };
 
+const legacyRedirectTemplate = (page) => {
+  const targetPath = pagePath(page, "zh");
+  const targetUrl = `${siteOrigin}${targetPath}`;
+
+  return `<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="refresh" content="0; url=${targetPath}">
+    <link rel="canonical" href="${targetUrl}">
+    <title>页面已迁移｜Jonny</title>
+  </head>
+  <body>
+    <main>
+      <p>中文页面已迁移到 <a href="${targetPath}">${targetPath}</a>。</p>
+    </main>
+    <script>window.location.replace(${JSON.stringify(targetPath)} + window.location.search + window.location.hash);</script>
+  </body>
+</html>
+`;
+};
+
 const renderPage = (page, lang) => {
   if (page === "home") return homePage(lang);
   if (page === "work") return workPage(lang);
@@ -486,7 +516,7 @@ const renderPage = (page, lang) => {
 };
 
 const pages = ["home", "work", "research", "experience"];
-const languages = ["en", "zh"];
+const languages = ["zh", "en"];
 const generatedFiles = new Map();
 
 for (const page of pages) {
@@ -497,6 +527,10 @@ for (const page of pages) {
   }
 }
 
+for (const page of pages) {
+  generatedFiles.set(legacyChineseFile(page), legacyRedirectTemplate(page));
+}
+
 const sitemapEntries = pages
   .flatMap((page) =>
     languages.map(
@@ -504,9 +538,10 @@ const sitemapEntries = pages
     <loc>${siteOrigin}${pagePath(page, lang)}</loc>
     <xhtml:link rel="alternate" hreflang="en" href="${siteOrigin}${pagePath(page, "en")}" />
     <xhtml:link rel="alternate" hreflang="zh-CN" href="${siteOrigin}${pagePath(page, "zh")}" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="${siteOrigin}${pagePath(page, "zh")}" />
     <lastmod>${lastModified}</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>${page === "home" ? (lang === "en" ? "1.0" : "0.9") : "0.8"}</priority>
+    <priority>${page === "home" ? (lang === "zh" ? "1.0" : "0.9") : "0.8"}</priority>
   </url>`,
     ),
   )
@@ -541,12 +576,12 @@ if (process.argv.includes("--check")) {
     console.error("Run: node scripts/build-pages.mjs");
     process.exitCode = 1;
   } else {
-    console.log(`Verified ${pages.length * languages.length} pages and sitemap.xml`);
+    console.log(`Verified ${pages.length * languages.length} pages, ${pages.length} legacy redirects, and sitemap.xml`);
   }
 } else {
   for (const [output, generatedText] of generatedFiles) {
     await mkdir(dirname(output), { recursive: true });
     await writeFile(output, generatedText, "utf8");
   }
-  console.log(`Generated ${pages.length * languages.length} pages and sitemap.xml`);
+  console.log(`Generated ${pages.length * languages.length} pages, ${pages.length} legacy redirects, and sitemap.xml`);
 }
