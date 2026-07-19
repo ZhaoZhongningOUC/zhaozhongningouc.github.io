@@ -9,7 +9,7 @@
 export const siteContent = {
   // Change to "en" to publish English at / and Chinese under /zh/.
   routing: {
-    defaultLanguage: "zh",
+    defaultLanguage: "en",
   },
 
   meta: {
