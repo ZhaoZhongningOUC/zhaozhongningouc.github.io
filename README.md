@@ -1,6 +1,6 @@
 # Jonny — Personal Website
 
-一个简洁、双语、无需第三方依赖的在线简历，直接部署在 GitHub Pages。
+一个采用深海蓝灰主题、支持中英文且无需第三方依赖的在线简历，直接部署在 GitHub Pages。
 
 ## 页面结构
 
