@@ -48,28 +48,28 @@ const pageMeta = {
     description: content.meta.description,
   },
   about: {
-    title: { en: "About — Jonny", zh: "个人介绍｜Jonny" },
+    title: { en: "About — Jonny Chao", zh: "个人介绍｜赵中宁" },
     description: {
-      en: "Ready-to-use short and extended biographies covering education, research, and current work.",
-      zh: "可直接使用的简要版与详细版个人介绍，涵盖教育经历、学术研究和主要工作。",
+      en: "Profile of Jonny Chao, covering education, research output, recognition, and current work.",
+      zh: "赵中宁个人介绍，涵盖教育背景、学术成果、代表荣誉与主要工作。",
     },
   },
   work: {
-    title: { en: "Work — Jonny", zh: "工作｜Jonny" },
+    title: { en: "Work — Jonny Chao", zh: "工作｜赵中宁" },
     description: {
-      en: "OneScience development, Earth-system AI, and heterogeneous high-performance scientific software.",
-      zh: "OneScience 研发、气象海洋 AI4S 与异构高性能软件工作。",
+      en: "OneScience development, Earth-system AI, OneSkills and Agent support, and heterogeneous high-performance scientific software.",
+      zh: "OneScience 研发、气象海洋 AI4S、OneSkills 与 Agent 支持及异构高性能软件工作。",
     },
   },
   research: {
-    title: { en: "Research — Jonny", zh: "研究｜Jonny" },
+    title: { en: "Research — Jonny Chao", zh: "研究｜赵中宁" },
     description: {
       en: "Selected research, publications, and patents in marine spatiotemporal intelligence and multi-source data fusion.",
       zh: "聚焦海洋时空智能与多源数据融合的代表性研究、学术论文和发明专利。",
     },
   },
   experience: {
-    title: { en: "Experience — Jonny", zh: "经历｜Jonny" },
+    title: { en: "Experience — Jonny Chao", zh: "经历｜赵中宁" },
     description: {
       en: "Work, education, research programs, and selected doctoral recognition.",
       zh: "工作经历、教育背景、科研项目与博士阶段代表性荣誉。",
@@ -92,7 +92,7 @@ const labels = {
     overview: "Overview",
     role: "Core responsibilities",
     focus: "Areas of work",
-    domains: "Research domains",
+    domains: "Capability areas",
     selectedResearch: "Selected research",
     publications: "Publications",
     journals: "Journal articles",
@@ -118,7 +118,7 @@ const labels = {
     overview: "项目概览",
     role: "主要工作",
     focus: "工作方向",
-    domains: "覆盖领域",
+    domains: "覆盖领域与能力",
     selectedResearch: "代表性研究",
     publications: "学术论文",
     journals: "期刊论文",
@@ -148,6 +148,7 @@ const googleScholarUrl = (title) =>
 const header = (page, lang) => {
   const copy = labels[lang];
   const alternateLang = lang === "en" ? "zh" : "en";
+  const displayName = text(content.person.name, lang);
   const navLinks = content.nav
     .map(
       (item) => `
@@ -161,7 +162,7 @@ const header = (page, lang) => {
     <a class="skip-link" href="#main-content">${copy.skip}</a>
     <header class="site-header">
       <div class="site-nav container">
-        <a class="wordmark" href="${pagePath("home", lang)}" aria-label="Jonny — ${escapeHtml(text(content.nav[0].label, lang))}">Jonny</a>
+        <a class="wordmark" href="${pagePath("home", lang)}" aria-label="${escapeHtml(displayName)} — ${escapeHtml(text(content.nav[0].label, lang))}">${escapeHtml(displayName)}</a>
         <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu">
           <span class="nav-toggle__label">${copy.menu}</span>
           <span class="nav-toggle__icon" aria-hidden="true"><i></i><i></i></span>
@@ -176,10 +177,11 @@ const header = (page, lang) => {
 
 const footer = (page, lang) => {
   const copy = labels[lang];
+  const displayName = text(content.person.name, lang);
   return `
     <footer class="site-footer">
       <div class="container footer-inner">
-        <p>© ${new Date().getFullYear()} Jonny</p>
+        <p>© ${new Date().getFullYear()} ${escapeHtml(displayName)}</p>
         <div class="footer-links">
           <a href="mailto:${escapeHtml(content.person.email)}">${copy.email}</a>
           <a href="https://github.com/ZhaoZhongningOUC" target="_blank" rel="noreferrer">${copy.github}</a>
@@ -204,6 +206,7 @@ const homeFeatureSection = ({ className, href, label, title, summary, details, l
 
 const homePage = (lang) => {
   const copy = labels[lang];
+  const displayName = text(content.person.name, lang);
   const highestEducation = content.journey.find((item) => item.featuredOnHome);
   if (!highestEducation) throw new Error("One education entry must set featuredOnHome: true");
   const leadAuthorTotal = content.publications.filter((paper) => paper.leadAuthor).length;
@@ -230,17 +233,17 @@ const homePage = (lang) => {
         <div class="container home-hero__inner">
           <div class="home-copy">
             <p class="eyebrow">${escapeHtml(text(content.hero.eyebrow, lang))}</p>
-            <h1 id="home-title">Jonny<span aria-hidden="true">.</span></h1>
+            <h1 id="home-title">${escapeHtml(displayName)}<span aria-hidden="true">.</span></h1>
             <p class="home-headline">${escapeHtml(text(content.hero.headline, lang))}</p>
             <div class="home-actions">
               <a class="primary-link" href="mailto:${escapeHtml(content.person.email)}">${copy.email}<span aria-hidden="true">↗</span></a>
               ${internalLink(pagePath("about", lang), copy.about)}
             </div>
           </div>
-          <figure class="home-portrait">
-            <img src="${content.person.portrait}" alt="${lang === "en" ? "Portrait of Jonny" : "Jonny 个人照片"}" width="480" height="600" fetchpriority="high">
-          </figure>
         </div>
+        <figure class="home-portrait">
+          <img src="${content.person.portrait}" alt="${lang === "en" ? "Portrait of Jonny Chao outdoors" : "赵中宁户外照片"}" width="1672" height="941" fetchpriority="high">
+        </figure>
       </section>
       <section class="home-status-section" aria-labelledby="resume-overview-title">
         <div class="container home-status-row">
@@ -304,6 +307,26 @@ const copyButton = ({ target, label, copiedLabel, copyFailedLabel }) => `
 
 const aboutPage = (lang) => {
   const bio = content.about;
+  const displayName = text(content.person.name, lang);
+  const leadAuthorTotal = content.publications.filter((paper) => paper.leadAuthor).length;
+  const dissertationHonorTotal = content.awards.filter((award) => award.featured).length;
+  const metrics = [
+    { value: content.publications.length, label: lang === "en" ? "published papers" : "篇学术论文" },
+    { value: leadAuthorTotal, label: lang === "en" ? "first / co-first author" : "篇第一 / 共同第一作者" },
+    { value: content.patents.length, label: lang === "en" ? "invention patents" : "项发明专利" },
+    { value: dissertationHonorTotal, label: lang === "en" ? "dissertation honors" : "项优秀博士论文荣誉" },
+  ]
+    .map((item) => `<div class="about-metric"><dt>${item.value}</dt><dd>${escapeHtml(item.label)}</dd></div>`)
+    .join("");
+  const highlights = bio.highlights.items
+    .map(
+      (item) => `
+        <article class="bio-highlight">
+          <span>${escapeHtml(item.index)}</span>
+          <div><h3>${escapeHtml(text(item.title, lang))}</h3><p>${escapeHtml(text(item.text, lang))}</p></div>
+        </article>`,
+    )
+    .join("");
   const detailedParagraphs = bio.detailed.paragraphs
     .map(
       (paragraph) => `
@@ -319,26 +342,27 @@ const aboutPage = (lang) => {
       <header class="about-hero">
         <div class="container about-hero__inner">
           <p class="eyebrow">${escapeHtml(text(bio.eyebrow, lang))}</p>
-          <h1>${escapeHtml(text(bio.title, lang))}</h1>
-          <p>${escapeHtml(text(bio.intro, lang))}</p>
+          <h1>${escapeHtml(displayName)}</h1>
+          <p class="about-hero__role">${escapeHtml(text(bio.role, lang))}</p>
+          <div class="about-hero__bio" id="bio-brief-copy"><p data-copy-text>${escapeHtml(text(bio.brief.text, lang))}</p></div>
+          ${copyButton({
+            target: "bio-brief-copy",
+            label: text(bio.brief.copyLabel, lang),
+            copiedLabel: text(bio.brief.copiedLabel, lang),
+            copyFailedLabel: text(bio.brief.copyFailedLabel, lang),
+          })}
         </div>
       </header>
-      <section class="bio-section bio-section--brief" aria-labelledby="bio-brief-title">
+      <section class="about-metrics-section" aria-label="${lang === "en" ? "Profile highlights" : "个人成果概览"}">
+        <div class="container"><dl class="about-metrics">${metrics}</dl></div>
+      </section>
+      <section class="bio-section bio-section--highlights" aria-labelledby="bio-highlights-title">
         <div class="container bio-section__inner">
           <div class="bio-section__meta">
-            <p class="home-card-label">${escapeHtml(text(bio.brief.label, lang))}</p>
-            <h2 id="bio-brief-title">${escapeHtml(text(bio.brief.title, lang))}</h2>
-            <p>${escapeHtml(text(bio.brief.note, lang))}</p>
-            ${copyButton({
-              target: "bio-brief-copy",
-              label: text(bio.brief.copyLabel, lang),
-              copiedLabel: text(bio.brief.copiedLabel, lang),
-              copyFailedLabel: text(bio.brief.copyFailedLabel, lang),
-            })}
+            <p class="home-card-label">${escapeHtml(text(bio.highlights.label, lang))}</p>
+            <h2 id="bio-highlights-title">${escapeHtml(text(bio.highlights.title, lang))}</h2>
           </div>
-          <div class="bio-copy bio-copy--brief" id="bio-brief-copy">
-            <p data-copy-text>${escapeHtml(text(bio.brief.text, lang))}</p>
-          </div>
+          <div class="bio-highlights">${highlights}</div>
         </div>
       </section>
       <section class="bio-section bio-section--detailed" aria-labelledby="bio-detailed-title">
@@ -346,7 +370,6 @@ const aboutPage = (lang) => {
           <div class="bio-section__meta">
             <p class="home-card-label">${escapeHtml(text(bio.detailed.label, lang))}</p>
             <h2 id="bio-detailed-title">${escapeHtml(text(bio.detailed.title, lang))}</h2>
-            <p>${escapeHtml(text(bio.detailed.note, lang))}</p>
             ${copyButton({
               target: "bio-detailed-copy",
               label: text(bio.detailed.copyLabel, lang),
@@ -403,8 +426,8 @@ const workPage = (lang) => {
       ${pageHeading({
         title: lang === "en" ? "Work" : "工作",
         intro: lang === "en"
-          ? "AI for Science frameworks, weather and ocean models, data pipelines, and heterogeneous platform adaptation."
-          : "主要开展 AI4S 框架建设、气象海洋模型研发、数据流程开发和异构计算平台适配。",
+          ? "AI for Science frameworks, weather and ocean models, data pipelines, OneSkills and Agent support, and heterogeneous platform adaptation."
+          : "主要开展 AI4S 框架建设、气象海洋模型研发、数据流程开发、OneSkills 与 Agent 支持和异构计算平台适配。",
       })}
       <div class="container resume-content">
         ${section({
@@ -431,14 +454,25 @@ const workPage = (lang) => {
     </main>`;
 };
 
+const publicationMetric = (paper, lang) => {
+  if (Number(paper.citations) > 0 && paper.openAlexUrl) {
+    return {
+      label: lang === "en"
+        ? `${paper.citations} OpenAlex citation${paper.citations === 1 ? "" : "s"}`
+        : `OpenAlex 引用 ${paper.citations} 次`,
+      url: paper.openAlexUrl,
+    };
+  }
+  if (paper.metric) return { label: text(paper.metric, lang), url: paper.metricUrl || paper.url };
+  return null;
+};
+
 const selectedResearch = (lang) =>
   content.selectedResearch
     .map((project) => {
       const paper = content.publications.find((item) => item.title === project.fullTitle);
       if (!paper) throw new Error(`Missing publication metadata for selected research: ${project.fullTitle}`);
-      const citationLabel = lang === "en"
-        ? `${paper.citations} OpenAlex citation${paper.citations === 1 ? "" : "s"}`
-        : `OpenAlex 引用 ${paper.citations} 次`;
+      const impact = publicationMetric(paper, lang);
 
       return `
         <article class="research-row">
@@ -447,7 +481,7 @@ const selectedResearch = (lang) =>
             <h3>${escapeHtml(project.title)}</h3>
             <p class="research-row__title">${escapeHtml(project.fullTitle)}</p>
             <p>${escapeHtml(text(project.summary, lang))}</p>
-            <a class="research-impact" href="${escapeHtml(paper.openAlexUrl)}" target="_blank" rel="noreferrer">${escapeHtml(citationLabel)}<span aria-hidden="true">↗</span></a>
+            ${impact ? `<a class="research-impact" href="${escapeHtml(impact.url)}" target="_blank" rel="noreferrer">${escapeHtml(impact.label)}<span aria-hidden="true">↗</span></a>` : ""}
             <div class="section-links">
               ${project.links.map((link) => externalLink(link.url, text(link.label, lang))).join("")}
               ${externalLink(googleScholarUrl(project.fullTitle), "Google Scholar")}
@@ -459,14 +493,15 @@ const selectedResearch = (lang) =>
 
 const publicationRows = (items, lang) =>
   items
-    .map(
-      (paper) => `
+    .map((paper) => {
+      const impact = publicationMetric(paper, lang);
+      return `
         <a class="publication-row" href="${escapeHtml(paper.url)}" target="_blank" rel="noreferrer">
           <span class="publication-year">${paper.year}</span>
-          <span class="publication-copy"><strong>${escapeHtml(paper.title)}</strong><small>${escapeHtml(paper.venue)} · ${escapeHtml(text(paper.role, lang))} · ${lang === "en" ? `${paper.citations} OpenAlex citation${paper.citations === 1 ? "" : "s"}` : `OpenAlex 引用 ${paper.citations} 次`}</small></span>
+          <span class="publication-copy"><strong>${escapeHtml(paper.title)}</strong><small>${escapeHtml(paper.venue)} · ${escapeHtml(text(paper.role, lang))}${impact ? ` · ${escapeHtml(impact.label)}` : ""}</small></span>
           <span aria-hidden="true">↗</span>
-        </a>`,
-    )
+        </a>`;
+    })
     .join("");
 
 const researchPage = (lang) => {
@@ -497,8 +532,8 @@ const researchPage = (lang) => {
       ${pageHeading({
         title: lang === "en" ? "Research" : "研究与论文",
         intro: lang === "en"
-          ? "Research spanning multi-source ocean data, vessel-trajectory reconstruction, and fishing-effort forecasting."
-          : "研究方向围绕多源海洋数据融合、渔船轨迹重建和捕捞努力量分布预测。",
+          ? "Selected studies, a complete publication list, verifiable research indicators, and patents in marine spatiotemporal intelligence."
+          : "围绕海洋时空智能，集中展示代表性研究、完整论文清单、可核验指标与专利成果。",
       })}
       <div class="container resume-content">
         ${section({ label: copy.selectedResearch, body: `${researchOverview}<div class="research-list">${selectedResearch(lang)}</div>`, className: "panel--blue", id: "selected-research" })}
@@ -565,6 +600,9 @@ const experiencePage = (lang) => {
     <main id="main-content">
       ${pageHeading({
         title: lang === "en" ? "Experience" : "经历",
+        intro: lang === "en"
+          ? "Current work, complete education, selected recognition, and research programs."
+          : "集中展示目前工作、完整教育背景、代表荣誉与科研项目经历。",
       })}
       <div class="container resume-content">
         ${section({
@@ -579,26 +617,29 @@ const experiencePage = (lang) => {
           className: "panel--blue",
           id: "education",
         })}
-        ${section({ label: copy.programs, body: `<div class="program-list">${programRows}</div>`, className: "panel--white", id: "programs" })}
         ${section({
           label: copy.recognition,
           body: `<div class="featured-award-grid">${featuredAwards}</div><div class="award-list award-list--compact">${awardRows}</div><p class="earlier-recognition">${escapeHtml(text(content.earlierRecognition, lang))}</p>`,
           className: "panel--soft",
           id: "recognition",
         })}
+        ${section({ label: copy.programs, body: `<div class="program-list">${programRows}</div>`, className: "panel--white", id: "programs" })}
       </div>
     </main>`;
 };
 
 const structuredData = (page, lang, canonical) => {
+  const displayName = text(content.person.name, lang);
+  const alternateName = lang === "en" ? text(content.person.name, "zh") : text(content.person.name, "en");
   const data =
     page === "home"
       ? {
           "@context": "https://schema.org",
           "@type": "Person",
-          name: "Jonny",
+          name: displayName,
+          alternateName,
           url: `${siteOrigin}/`,
-          image: `${siteOrigin}/assets/images/portrait.jpg`,
+          image: `${siteOrigin}${content.person.portrait}`,
           worksFor: {
             "@type": "Organization",
             name: text(content.person.organization, lang),
@@ -612,7 +653,7 @@ const structuredData = (page, lang, canonical) => {
           "@type": "ProfilePage",
           name: text(pageMeta[page].title, lang),
           url: canonical,
-          mainEntity: { "@type": "Person", name: "Jonny", url: `${siteOrigin}/` },
+          mainEntity: { "@type": "Person", name: displayName, alternateName, url: `${siteOrigin}/` },
         };
   return JSON.stringify(data).replaceAll("<", "\\u003c");
 };
@@ -622,6 +663,7 @@ const documentTemplate = (page, lang, body) => {
   const canonical = `${siteOrigin}${pagePath(page, lang)}`;
   const title = text(pageMeta[page].title, lang);
   const description = text(pageMeta[page].description, lang);
+  const displayName = text(content.person.name, lang);
 
   return `<!doctype html>
 <html lang="${languageTag}">
@@ -629,20 +671,20 @@ const documentTemplate = (page, lang, body) => {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="${escapeHtml(description)}">
-    <meta name="author" content="Jonny">
+    <meta name="author" content="${escapeHtml(displayName)}">
     <meta name="theme-color" content="#18252d">
     <title>${escapeHtml(title)}</title>
     <link rel="canonical" href="${canonical}">
     <link rel="alternate" hreflang="en" href="${siteOrigin}${pagePath(page, "en")}">
     <link rel="alternate" hreflang="zh-CN" href="${siteOrigin}${pagePath(page, "zh")}">
     <link rel="alternate" hreflang="x-default" href="${siteOrigin}${pagePath(page, "zh")}">
-    ${page === "home" ? '<link rel="preload" href="/assets/images/portrait.jpg" as="image" type="image/jpeg">' : ""}
+    ${page === "home" ? `<link rel="preload" href="${content.person.portrait}" as="image" type="image/jpeg">` : ""}
     <link rel="stylesheet" href="/assets/css/styles.css">
     <meta property="og:type" content="website">
     <meta property="og:url" content="${canonical}">
     <meta property="og:title" content="${escapeHtml(title)}">
     <meta property="og:description" content="${escapeHtml(description)}">
-    <meta property="og:image" content="${siteOrigin}/assets/images/og-v5.png">
+    <meta property="og:image" content="${siteOrigin}/assets/images/og-v6.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:locale" content="${lang === "en" ? "en_US" : "zh_CN"}">
@@ -650,7 +692,7 @@ const documentTemplate = (page, lang, body) => {
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="${escapeHtml(title)}">
     <meta name="twitter:description" content="${escapeHtml(description)}">
-    <meta name="twitter:image" content="${siteOrigin}/assets/images/og-v5.png">
+    <meta name="twitter:image" content="${siteOrigin}/assets/images/og-v6.png">
     <script type="application/ld+json">${structuredData(page, lang, canonical)}</script>
     <script defer src="/assets/js/main.js"></script>
   </head>
@@ -674,7 +716,7 @@ const legacyRedirectTemplate = (page) => {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="refresh" content="0; url=${targetPath}">
     <link rel="canonical" href="${targetUrl}">
-    <title>页面已迁移｜Jonny</title>
+    <title>页面已迁移｜赵中宁</title>
   </head>
   <body>
     <main>
@@ -694,7 +736,7 @@ const renderPage = (page, lang) => {
   return experiencePage(lang);
 };
 
-const pages = ["home", "about", "work", "research", "experience"];
+const pages = ["home", "about", "experience", "research", "work"];
 const languages = ["zh", "en"];
 const generatedFiles = new Map();
 

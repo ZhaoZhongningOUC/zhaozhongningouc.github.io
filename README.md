@@ -1,4 +1,4 @@
-# Jonny — Personal Website
+# 赵中宁 / Jonny Chao — Personal Website
 
 一个采用深海蓝灰主题、支持中英文且无需第三方依赖的在线简历，直接部署在 GitHub Pages。
 
@@ -7,10 +7,10 @@
 | 页面 | 中文（默认） | 英文 |
 | --- | --- | --- |
 | 一页简历总览 | `/` | `/en/` |
-| 可复制的个人介绍 | `/about/` | `/en/about/` |
-| 当前工作与 OneScience | `/work/` | `/en/work/` |
-| 研究、论文与专利 | `/research/` | `/en/research/` |
+| 个人介绍与成果亮点 | `/about/` | `/en/about/` |
 | 工作、教育与荣誉 | `/experience/` | `/en/experience/` |
+| 研究、论文与专利 | `/research/` | `/en/research/` |
+| 当前工作与 OneScience | `/work/` | `/en/work/` |
 
 中文是默认语言。主页以一页简历的方式汇总个人信息：工作与学历在同一条横向信息带中等权展示，学术研究、主要工作和代表荣誉分别使用全宽色块章节，并可继续进入对应子页面。原有 `/zh/` 系列地址会自动跳转到新的中文地址。
 
@@ -42,7 +42,7 @@ node scripts/build-pages.mjs --check
 
 ## 新增论文
 
-在 `assets/js/content.js` 的 `publications` 数组中复制一项，填写年份、标题、期刊或会议、作者角色、DOI、OpenAlex 地址及引用次数。页面会自动把名称包含 `OCEANS` 的论文归入会议论文，其余归入期刊论文。主页最高学历由 `journey` 中的 `featuredOnHome: true` 决定。
+在 `assets/js/content.js` 的 `publications` 数组中复制一项，填写年份、标题、期刊或会议、作者角色、DOI、OpenAlex 地址及引用次数。引用次数为 0 时，可以填写 `metric` 与 `metricUrl`，改为展示期刊指标或收录信息。页面会自动把名称包含 `OCEANS` 的论文归入会议论文，其余归入期刊论文。主页最高学历由 `journey` 中的 `featuredOnHome: true` 决定。
 
 如果论文同时属于代表研究，请在 `selectedResearch` 中增加更完整的简介和代码链接，并确保 `fullTitle` 与 `publications` 中的标题完全一致。页面展示的是 OpenAlex 引用次数，并提供 Google Scholar 按论文题名实时检索的入口，不展示论文内部实验指标。更新引用次数时，同时修改 `citationData.updated`。
 
