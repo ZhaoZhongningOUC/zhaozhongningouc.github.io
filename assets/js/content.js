@@ -14,8 +14,8 @@ export const siteContent = {
       zh: "Jonny｜AI4S、气象海洋与高性能计算",
     },
     description: {
-      en: "Jonny builds high-performance AI for Science software for weather, ocean, and scientific discovery, and coordinates the development of OneScience at Sugon.",
-      zh: "Jonny 现就职于中科曙光，负责 OneScience 整体推进和地球科学方向研发，主要关注气象海洋 AI4S 与异构高性能软件。",
+      en: "Based at Sugon, coordinating OneScience development and leading Earth science R&D across weather, ocean, and heterogeneous high-performance computing.",
+      zh: "目前就职于中科曙光，从事 AI4S 与异构高性能软件研发，统筹 OneScience 研发，负责地球科学方向。",
     },
     lastUpdated: "2026-07-19",
   },
@@ -26,14 +26,10 @@ export const siteContent = {
     email: "zhaozhn@sugon.com",
     location: { en: "China", zh: "中国" },
     role: {
-      en: "OneScience Work Coordination & Earth Science R&D",
-      zh: "OneScience 整体推进与地球科学方向研发",
+      en: "OneScience Development · Earth Science R&D",
+      zh: "OneScience 整体推进 · 地球科学研发",
     },
     organization: { en: "Sugon", zh: "中科曙光" },
-    organizationLogo: {
-      src: "/assets/images/sugon-logo.png",
-      alt: { en: "Sugon logo", zh: "中科曙光标识" },
-    },
     links: [
       {
         label: { en: "GitHub", zh: "GitHub" },
@@ -55,7 +51,7 @@ export const siteContent = {
     {
       page: "work",
       label: { en: "Work", zh: "工作" },
-      description: { en: "OneScience and current focus", zh: "OneScience 与当前工作" },
+      description: { en: "OneScience and core responsibilities", zh: "OneScience 与主要工作" },
     },
     {
       page: "research",
@@ -79,8 +75,8 @@ export const siteContent = {
       zh: "把气象海洋领域的 AI 模型做成真正可用的科学软件。",
     },
     summary: {
-      en: "At Sugon, I coordinate work across OneScience and am responsible for R&D in its Earth science track, working across weather, ocean, scientific models, and heterogeneous computing.",
-      zh: "我目前就职于中科曙光，负责 OneScience 的整体推进和地球科学方向研发，主要涉及气象海洋模型、数据处理流程以及 GPU 与海光 DCU 平台适配。",
+      en: "Based at Sugon, working on AI for Science and heterogeneous HPC software; coordinating OneScience development and leading its Earth science track across weather and ocean models, data pipelines, and GPU/Hygon DCU deployment.",
+      zh: "目前就职于中科曙光，从事 AI4S 与异构高性能软件研发，统筹 OneScience 研发，负责地球科学方向，主要开展气象海洋模型研发、数据流程开发和 GPU、海光 DCU 平台适配。",
     },
   },
 
@@ -112,10 +108,6 @@ export const siteContent = {
   ],
 
   oneScience: {
-    organizationLogo: {
-      src: "/assets/images/sugon-logo.png",
-      alt: { en: "Sugon logo", zh: "中科曙光标识" },
-    },
     title: "OneScience",
     subtitle: {
       en: "An open-source AI for Science model toolkit",
@@ -126,8 +118,8 @@ export const siteContent = {
       zh: "OneScience 面向多个科研领域，提供数据集、基础模型与预训练模型、前后处理工具及科学数据处理流程。项目支持 GPU 与海光 DCU，并采用 Apache-2.0 协议开源。",
     },
     role: {
-      en: "Responsible for work coordination across OneScience and for Earth science R&D spanning weather and ocean models, data workflows, and heterogeneous deployment.",
-      zh: "我负责 OneScience 的整体推进，并承担地球科学方向研发，包括气象海洋模型、数据处理流程和异构平台适配。",
+      en: "Coordinates development across OneScience and leads the Earth science track, covering weather and ocean models, data pipelines, and deployment on GPU and Hygon DCU platforms.",
+      zh: "统筹 OneScience 研发，负责地球科学方向建设，包括气象海洋模型研发、数据流程开发，以及 GPU、海光 DCU 平台适配。",
     },
     facts: [
       { value: "5", label: { en: "research domains", zh: "覆盖方向" } },
@@ -163,7 +155,6 @@ export const siteContent = {
         en: "Fuses historical fishing distributions, ocean hydrology, and chlorophyll data with ResNet and Transformer to forecast day-level fishing effort for the coming week.",
         zh: "融合历史捕捞努力量分布、海洋水文要素和叶绿素浓度数据，基于 ResNet 与 Transformer 预测未来一周的逐日捕捞努力量分布。",
       },
-      metric: { value: "5.32%", label: { en: "average error", zh: "平均预测误差率" } },
       links: [
         { label: { en: "Paper", zh: "论文原文" }, url: "https://doi.org/10.1007/s11160-025-09951-w" },
         { label: { en: "Code & data", zh: "开源代码与数据" }, url: "https://github.com/ZhaoZhongningOUC/TransFish" },
@@ -178,7 +169,6 @@ export const siteContent = {
         en: "Reconstructs two-hour historical vessel tracks at three-minute resolution by combining VMS records with ocean hydrological fields.",
         zh: "融合 VMS 轨迹记录与海洋水文场，将采样间隔为两小时的历史渔船轨迹重建为采样间隔三分钟的轨迹。",
       },
-      metric: { value: "0.20 km", label: { en: "East China Sea error", zh: "东海数据集插值误差" } },
       links: [
         { label: { en: "Paper", zh: "论文原文" }, url: "https://doi.org/10.1016/j.oceaneng.2023.116588" },
         { label: { en: "Code & samples", zh: "代码与示例数据" }, url: "https://github.com/ZhaoZhongningOUC/HiTrip" },
@@ -193,10 +183,6 @@ export const siteContent = {
         en: "Introduces fishing chronology to identify a small indicator fleet whose current behavior predicts near-future fishing-effort distributions.",
         zh: "提出捕捞时序关系，并据此从船队中识别少量指示渔船，利用其当前捕捞行为预测短期捕捞努力量分布。",
       },
-      metric: {
-        value: { en: "19 / 1,589", zh: "19 艘" },
-        label: { en: "indicator vessels · 6.95% error", zh: "指示渔船（共 1,589 艘） · 预测误差率 6.95%" },
-      },
       links: [
         { label: { en: "Paper", zh: "论文原文" }, url: "https://doi.org/10.1016/j.eswa.2021.115512" },
         { label: { en: "Code & data", zh: "开源代码与数据" }, url: "https://github.com/ZhaoZhongningOUC/EarlyBirds" },
@@ -210,6 +196,9 @@ export const siteContent = {
       title: "TransFish: day-level forecasting of fishing effort distribution via transformer on multi-source data",
       venue: "Reviews in Fish Biology and Fisheries, 35, 1143–1170",
       role: { en: "First author", zh: "第一作者" },
+      leadAuthor: true,
+      citations: 0,
+      openAlexUrl: "https://openalex.org/W4411112115",
       url: "https://doi.org/10.1007/s11160-025-09951-w",
     },
     {
@@ -217,6 +206,9 @@ export const siteContent = {
       title: "HiTrip: Historical trajectory interpolation for trawlers via deep learning on multi-source data",
       venue: "Ocean Engineering, 292, 116588",
       role: { en: "First author", zh: "第一作者" },
+      leadAuthor: true,
+      citations: 13,
+      openAlexUrl: "https://openalex.org/W4390022206",
       url: "https://doi.org/10.1016/j.oceaneng.2023.116588",
     },
     {
@@ -224,6 +216,9 @@ export const siteContent = {
       title: "HyFish: hydrological factor fusion for prediction of fishing effort distribution with VMS dataset",
       venue: "Frontiers in Marine Science, 11, 1296146",
       role: { en: "Third author", zh: "第三作者" },
+      leadAuthor: false,
+      citations: 5,
+      openAlexUrl: "https://openalex.org/W4392002215",
       url: "https://doi.org/10.3389/fmars.2024.1296146",
     },
     {
@@ -231,6 +226,9 @@ export const siteContent = {
       title: "Echo-ID: Smartphone Placement Region Identification for Context-Aware Computing",
       venue: "Sensors, 23, 4302",
       role: { en: "Co-first author", zh: "共同第一作者" },
+      leadAuthor: true,
+      citations: 2,
+      openAlexUrl: "https://openalex.org/W4367183324",
       url: "https://doi.org/10.3390/s23094302",
     },
     {
@@ -238,6 +236,9 @@ export const siteContent = {
       title: "VDU: VMS Dataset Upsampling via Multi-Source Data Fusion for Trawlers",
       venue: "OCEANS 2023 - Limerick",
       role: { en: "Second author", zh: "第二作者" },
+      leadAuthor: false,
+      citations: 0,
+      openAlexUrl: "https://openalex.org/W4386631333",
       url: "https://doi.org/10.1109/OCEANSLimerick52467.2023.10244460",
     },
     {
@@ -245,6 +246,9 @@ export const siteContent = {
       title: "Short-term prediction of fishing effort distributions by discovering fishing chronology among trawlers based on VMS dataset",
       venue: "Expert Systems with Applications, 184, 115512",
       role: { en: "First author", zh: "第一作者" },
+      leadAuthor: true,
+      citations: 24,
+      openAlexUrl: "https://openalex.org/W3179438486",
       url: "https://doi.org/10.1016/j.eswa.2021.115512",
     },
     {
@@ -252,6 +256,9 @@ export const siteContent = {
       title: "HIT: Hybrid Interpolation for Trawlers based on Deep Learning",
       venue: "OCEANS 2021: San Diego - Porto",
       role: { en: "Second author", zh: "第二作者" },
+      leadAuthor: false,
+      citations: 2,
+      openAlexUrl: "https://openalex.org/W4213217286",
       url: "https://doi.org/10.23919/OCEANS44145.2021.9705828",
     },
     {
@@ -259,9 +266,22 @@ export const siteContent = {
       title: "Trawler Fishing Track Interpolation using LSTM for Satellite-based VMS Traces",
       venue: "2020 Global Oceans: Singapore - U.S. Gulf Coast (OCEANS 2020)",
       role: { en: "First author", zh: "第一作者" },
+      leadAuthor: true,
+      citations: 7,
+      openAlexUrl: "https://openalex.org/W3152767834",
       url: "https://doi.org/10.1109/IEEECONF38699.2020.9389435",
     },
   ],
+
+  citationData: {
+    source: "OpenAlex",
+    sourceUrl: "https://openalex.org/",
+    updated: { en: "July 2026", zh: "2026 年 7 月" },
+    note: {
+      en: "Citation counts are from OpenAlex; Google Scholar links run a live title search.",
+      zh: "引用次数来自 OpenAlex；Google Scholar 链接按论文题目实时检索。",
+    },
+  },
 
   patents: [
     {
@@ -283,14 +303,11 @@ export const siteContent = {
   journey: [
     {
       period: { en: "Now", zh: "至今" },
-      title: { en: "OneScience at Sugon", zh: "中科曙光 · OneScience" },
-      subtitle: {
-        en: "Overall coordination · Earth science R&D · Heterogeneous software",
-        zh: "整体推进 · 地球科学研发 · 异构适配",
-      },
+      title: { en: "OneScience & Earth Science R&D", zh: "OneScience 与地球科学方向研发" },
+      subtitle: { en: "Sugon", zh: "中科曙光" },
       description: {
-        en: "Responsible for work coordination across OneScience and for advancing weather and ocean capabilities in the AI4S framework.",
-        zh: "负责 OneScience 整体工作安排和地球科学方向研发，重点开展气象海洋模型、数据处理流程与异构平台适配。",
+        en: "Coordinates OneScience development and leads weather and ocean model engineering, data pipelines, and heterogeneous platform deployment.",
+        zh: "统筹 OneScience 研发，开展气象海洋模型研发、数据流程开发和异构计算平台适配。",
       },
     },
     {
@@ -298,8 +315,8 @@ export const siteContent = {
       title: { en: "Ph.D. · Computer Architecture", zh: "博士 · 计算机系统结构" },
       subtitle: { en: "Ocean University of China", zh: "中国海洋大学" },
       description: {
-        en: "Multi-source ocean data fusion and fishing-effort distribution forecasting.",
-        zh: "研究多源海洋数据融合与捕捞努力量分布预测。",
+        en: "Research on multi-source ocean data fusion, vessel-trajectory reconstruction, and fishing-effort distribution forecasting.",
+        zh: "围绕多源海洋数据融合、渔船轨迹重建与捕捞努力量分布预测开展研究。",
       },
     },
     {
@@ -357,19 +374,49 @@ export const siteContent = {
 
   awards: [
     {
+      year: "2025",
+      featured: true,
+      tier: { en: "Provincial", zh: "省级" },
+      title: { en: "Outstanding Doctoral Dissertation of Shandong Province", zh: "山东省优秀博士学位论文" },
+      organization: { en: "Shandong Provincial Department of Education", zh: "山东省教育厅" },
+      description: {
+        en: "Doctoral dissertation: Fishing-effort distribution forecasting based on vessel monitoring system data",
+        zh: "博士学位论文《基于船位监控系统数据的海洋捕捞强度分布预测研究》",
+      },
+    },
+    {
+      year: "2025",
+      featured: true,
+      tier: { en: "University", zh: "校级" },
+      title: { en: "Outstanding Doctoral Dissertation of Ocean University of China", zh: "中国海洋大学优秀博士学位论文" },
+      organization: { en: "Ocean University of China", zh: "中国海洋大学" },
+      description: {
+        en: "Doctoral dissertation: Fishing-effort distribution forecasting based on vessel monitoring system data",
+        zh: "博士学位论文《基于船位监控系统数据的海洋捕捞强度分布预测研究》",
+      },
+    },
+    {
+      year: "2024",
+      featured: false,
+      title: { en: "Academic and Practice Innovation Scholarship", zh: "学术（实践）创新奖学金" },
+      organization: { en: "Ocean University of China", zh: "中国海洋大学" },
+    },
+    {
       year: "2022",
-      title: { en: "Outstanding Doctoral Student", zh: "博士优秀研究生" },
+      featured: false,
+      title: { en: "Outstanding Graduate Student · 2021–2022", zh: "2021—2022 学年优秀研究生" },
       organization: { en: "Ocean University of China", zh: "中国海洋大学" },
     },
     {
       year: "2021",
+      featured: false,
       title: { en: "Best Paper · 15th China IoT Conference", zh: "第十五届中国物联网学术会议最佳论文" },
-      organization: { en: "Conference presenter", zh: "获奖论文答辩人" },
-    },
-    {
-      year: "2019",
-      title: { en: "First-class Academic Scholarship", zh: "一等学业奖学金" },
-      organization: { en: "Ocean University of China", zh: "中国海洋大学" },
+      organization: { en: "CCF IoT Technical Committee", zh: "中国计算机学会物联网专业委员会" },
     },
   ],
+
+  earlierRecognition: {
+    en: "Other recognition includes Outstanding Graduate Student and a first-class academic scholarship during the master’s program, plus second prize in the 4th Shandong University Student AI Competition.",
+    zh: "其他荣誉包括硕士阶段优秀研究生、一等学业奖学金，以及第四届山东省大学生人工智能大赛二等奖。",
+  },
 };

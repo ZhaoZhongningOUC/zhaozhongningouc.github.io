@@ -50,8 +50,8 @@ const pageMeta = {
   work: {
     title: { en: "Work — Jonny", zh: "工作｜Jonny" },
     description: {
-      en: "Jonny’s current work on OneScience, Earth-system AI, and heterogeneous high-performance scientific software.",
-      zh: "Jonny 目前负责 OneScience 整体推进，并开展气象海洋 AI4S 与异构高性能软件研发。",
+      en: "OneScience development, Earth-system AI, and heterogeneous high-performance scientific software.",
+      zh: "OneScience 研发、气象海洋 AI4S 与异构高性能软件工作。",
     },
   },
   research: {
@@ -64,8 +64,8 @@ const pageMeta = {
   experience: {
     title: { en: "Experience — Jonny", zh: "经历｜Jonny" },
     description: {
-      en: "Jonny’s work, education, research programs, and selected recognition.",
-      zh: "Jonny 的工作经历、教育背景、科研项目和荣誉奖励。",
+      en: "Work, education, research programs, and selected doctoral recognition.",
+      zh: "工作经历、教育背景、科研项目与博士阶段代表性荣誉。",
     },
   },
 };
@@ -77,14 +77,14 @@ const labels = {
     close: "Close",
     language: "中文",
     languageLabel: "切换为中文",
-    current: "Current",
+    current: "Product development",
     email: "Email",
     github: "GitHub",
     repository: "OneScience repository",
     overview: "Overview",
-    role: "My role",
-    focus: "Focus",
-    domains: "Domains",
+    role: "Core responsibilities",
+    focus: "Areas of work",
+    domains: "Research domains",
     selectedResearch: "Selected research",
     publications: "Publications",
     journals: "Journal articles",
@@ -93,11 +93,8 @@ const labels = {
     workExperience: "Work experience",
     education: "Education",
     programs: "Research programs",
-    recognition: "Recognition",
+    recognition: "Doctoral research recognition",
     present: "Present",
-    pageIntroWork: "Current work",
-    pageIntroResearch: "Research record",
-    pageIntroExperience: "Curriculum vitae",
   },
   zh: {
     skip: "跳到主要内容",
@@ -105,14 +102,14 @@ const labels = {
     close: "关闭",
     language: "EN",
     languageLabel: "切换到英文版",
-    current: "重点项目",
+    current: "产品研发",
     email: "邮件联系",
     github: "GitHub",
     repository: "OneScience 仓库",
     overview: "项目概览",
-    role: "我的工作",
-    focus: "重点方向",
-    domains: "覆盖方向",
+    role: "主要工作",
+    focus: "工作方向",
+    domains: "覆盖领域",
     selectedResearch: "代表性研究",
     publications: "学术论文",
     journals: "期刊论文",
@@ -121,11 +118,8 @@ const labels = {
     workExperience: "工作经历",
     education: "教育经历",
     programs: "科研项目",
-    recognition: "荣誉奖励",
+    recognition: "博士研究相关荣誉",
     present: "至今",
-    pageIntroWork: "当前工作",
-    pageIntroResearch: "学术研究",
-    pageIntroExperience: "个人经历",
   },
 };
 
@@ -133,6 +127,9 @@ const externalLink = (url, label, className = "text-link") => `
   <a class="${className}" href="${escapeHtml(url)}" target="_blank" rel="noreferrer">
     <span>${escapeHtml(label)}</span><span aria-hidden="true">↗</span>
   </a>`;
+
+const googleScholarUrl = (title) =>
+  `https://scholar.google.com/scholar?q=${encodeURIComponent(`"${title}"`)}`;
 
 const header = (page, lang) => {
   const copy = labels[lang];
@@ -225,12 +222,12 @@ const homePage = (lang) => {
     </main>`;
 };
 
-const pageHeading = ({ eyebrow, title, intro, lang }) => `
-  <header class="page-heading">
+const pageHeading = ({ eyebrow = "", title, intro = "" }) => `
+  <header class="page-heading${intro ? "" : " page-heading--compact"}">
     <div class="container page-heading__inner">
-      <p class="eyebrow">${escapeHtml(eyebrow)}</p>
+      ${eyebrow ? `<p class="eyebrow">${escapeHtml(eyebrow)}</p>` : ""}
       <h1>${escapeHtml(title)}</h1>
-      <p>${escapeHtml(intro)}</p>
+      ${intro ? `<p>${escapeHtml(intro)}</p>` : ""}
     </div>
   </header>`;
 
@@ -266,12 +263,10 @@ const workPage = (lang) => {
   return `
     <main id="main-content">
       ${pageHeading({
-        eyebrow: copy.pageIntroWork,
-        title: lang === "en" ? "Software for science, built to be used." : "围绕科研需求，研发易用、可复用的 AI4S 软件。",
+        title: lang === "en" ? "Work" : "工作",
         intro: lang === "en"
-          ? text(content.hero.summary, lang)
-          : "当前工作主要围绕 AI4S 框架建设、气象海洋模型研发和异构计算平台适配。",
-        lang,
+          ? "AI for Science frameworks, weather and ocean models, data pipelines, and heterogeneous platform adaptation."
+          : "主要开展 AI4S 框架建设、气象海洋模型研发、数据流程开发和异构计算平台适配。",
       })}
       <div class="container resume-content">
         ${section({
@@ -279,7 +274,8 @@ const workPage = (lang) => {
           title: content.oneScience.title,
           body: `
             <div class="organization-line">
-              <img src="${content.oneScience.organizationLogo.src}" alt="${escapeHtml(text(content.oneScience.organizationLogo.alt, lang))}">
+              <strong>${escapeHtml(text(content.person.organization, lang))}</strong>
+              <span aria-hidden="true">·</span>
               <span>${escapeHtml(text(content.oneScience.subtitle, lang))}</span>
             </div>
             <p class="section-lead">${escapeHtml(text(content.oneScience.description, lang))}</p>
@@ -297,19 +293,28 @@ const workPage = (lang) => {
 
 const selectedResearch = (lang) =>
   content.selectedResearch
-    .map(
-      (project) => `
+    .map((project) => {
+      const paper = content.publications.find((item) => item.title === project.fullTitle);
+      if (!paper) throw new Error(`Missing publication metadata for selected research: ${project.fullTitle}`);
+      const citationLabel = lang === "en"
+        ? `${paper.citations} OpenAlex citation${paper.citations === 1 ? "" : "s"}`
+        : `OpenAlex 引用 ${paper.citations} 次`;
+
+      return `
         <article class="research-row">
           <div class="research-row__meta"><span>${project.year}</span><span>${escapeHtml(text(project.role, lang))}</span></div>
           <div class="research-row__content">
             <h3>${escapeHtml(project.title)}</h3>
             <p class="research-row__title">${escapeHtml(project.fullTitle)}</p>
             <p>${escapeHtml(text(project.summary, lang))}</p>
-            <p class="research-result"><strong>${escapeHtml(text(project.metric.value, lang))}</strong> ${escapeHtml(text(project.metric.label, lang))}</p>
-            <div class="section-links">${project.links.map((link) => externalLink(link.url, text(link.label, lang))).join("")}</div>
+            <a class="research-impact" href="${escapeHtml(paper.openAlexUrl)}" target="_blank" rel="noreferrer">${escapeHtml(citationLabel)}<span aria-hidden="true">↗</span></a>
+            <div class="section-links">
+              ${project.links.map((link) => externalLink(link.url, text(link.label, lang))).join("")}
+              ${externalLink(googleScholarUrl(project.fullTitle), "Google Scholar")}
+            </div>
           </div>
-        </article>`,
-    )
+        </article>`;
+    })
     .join("");
 
 const publicationRows = (items, lang) =>
@@ -318,7 +323,7 @@ const publicationRows = (items, lang) =>
       (paper) => `
         <a class="publication-row" href="${escapeHtml(paper.url)}" target="_blank" rel="noreferrer">
           <span class="publication-year">${paper.year}</span>
-          <span class="publication-copy"><strong>${escapeHtml(paper.title)}</strong><small>${escapeHtml(paper.venue)} · ${escapeHtml(text(paper.role, lang))}</small></span>
+          <span class="publication-copy"><strong>${escapeHtml(paper.title)}</strong><small>${escapeHtml(paper.venue)} · ${escapeHtml(text(paper.role, lang))} · ${lang === "en" ? `${paper.citations} OpenAlex citation${paper.citations === 1 ? "" : "s"}` : `OpenAlex 引用 ${paper.citations} 次`}</small></span>
           <span aria-hidden="true">↗</span>
         </a>`,
     )
@@ -328,6 +333,15 @@ const researchPage = (lang) => {
   const copy = labels[lang];
   const journals = content.publications.filter((paper) => !paper.venue.includes("OCEANS"));
   const conferences = content.publications.filter((paper) => paper.venue.includes("OCEANS"));
+  const citationTotal = content.publications.reduce((total, paper) => total + paper.citations, 0);
+  const leadAuthorTotal = content.publications.filter((paper) => paper.leadAuthor).length;
+  const researchOverview = `
+    <dl class="research-overview" aria-label="${lang === "en" ? "Research summary" : "研究概览"}">
+      <div><dt>${content.publications.length}</dt><dd>${lang === "en" ? "publications" : "篇论文"}</dd></div>
+      <div><dt>${leadAuthorTotal}</dt><dd>${lang === "en" ? "first / co-first author" : "篇第一 / 共同第一作者"}</dd></div>
+      <div><dt>${citationTotal}</dt><dd>${lang === "en" ? "OpenAlex citations" : "次 OpenAlex 引用"}</dd></div>
+    </dl>
+    <p class="citation-note">${escapeHtml(text(content.citationData.note, lang))} <a href="${escapeHtml(content.citationData.sourceUrl)}" target="_blank" rel="noreferrer">${escapeHtml(content.citationData.source)}</a> · ${escapeHtml(text(content.citationData.updated, lang))}</p>`;
   const patents = content.patents
     .map(
       (patent, index) => `
@@ -341,15 +355,13 @@ const researchPage = (lang) => {
   return `
     <main id="main-content">
       ${pageHeading({
-        eyebrow: copy.pageIntroResearch,
-        title: lang === "en" ? "From ocean data to measurable research systems." : "围绕海洋时空数据开展建模、轨迹重建与分布预测。",
+        title: lang === "en" ? "Research" : "研究与论文",
         intro: lang === "en"
-          ? "My academic work focuses on multi-source ocean data, vessel trajectories, and fishing-effort forecasting."
-          : "我的学术研究主要围绕多源海洋数据融合、渔船轨迹重建和捕捞努力量分布预测展开。",
-        lang,
+          ? "Research spanning multi-source ocean data, vessel-trajectory reconstruction, and fishing-effort forecasting."
+          : "研究方向围绕多源海洋数据融合、渔船轨迹重建和捕捞努力量分布预测。",
       })}
       <div class="container resume-content">
-        ${section({ label: copy.selectedResearch, body: `<div class="research-list">${selectedResearch(lang)}</div>` })}
+        ${section({ label: copy.selectedResearch, body: `${researchOverview}<div class="research-list">${selectedResearch(lang)}</div>` })}
         ${section({
           label: copy.publications,
           body: `
@@ -364,11 +376,15 @@ const researchPage = (lang) => {
 const timelineRows = (items, lang) =>
   items
     .map(
-      (item) => `
+      (item) => {
+        const subtitle = text(item.subtitle, lang);
+        const description = text(item.description, lang);
+        return `
         <article class="timeline-row">
           <div class="timeline-period">${escapeHtml(text(item.period, lang))}</div>
-          <div><h3>${escapeHtml(text(item.title, lang))}</h3><p class="timeline-subtitle">${escapeHtml(text(item.subtitle, lang))}</p><p>${escapeHtml(text(item.description, lang))}</p></div>
-        </article>`,
+          <div><h3>${escapeHtml(text(item.title, lang))}</h3>${subtitle ? `<p class="timeline-meta">${escapeHtml(subtitle)}</p>` : ""}${description ? `<p>${escapeHtml(description)}</p>` : ""}</div>
+        </article>`;
+      },
     )
     .join("");
 
@@ -379,11 +395,24 @@ const experiencePage = (lang) => {
       (program) => `
         <article class="program-row">
           <span>${program.period}</span>
-          <div><h3>${escapeHtml(text(program.title, lang))}</h3><p class="timeline-subtitle">${escapeHtml(text(program.sponsor, lang))}</p><p>${escapeHtml(text(program.contribution, lang))}</p></div>
+          <div><h3>${escapeHtml(text(program.title, lang))}</h3><p class="timeline-meta">${escapeHtml(text(program.sponsor, lang))}</p><p>${escapeHtml(text(program.contribution, lang))}</p></div>
+        </article>`,
+    )
+    .join("");
+  const featuredAwards = content.awards
+    .filter((award) => award.featured)
+    .map(
+      (award, index) => `
+        <article class="featured-award${index === 0 ? " featured-award--primary" : ""}">
+          <div class="featured-award__meta"><span>${escapeHtml(text(award.tier, lang))}</span><span>${award.year}</span></div>
+          <h3>${escapeHtml(text(award.title, lang))}</h3>
+          <p>${escapeHtml(text(award.description, lang))}</p>
+          <small>${escapeHtml(text(award.organization, lang))}</small>
         </article>`,
     )
     .join("");
   const awardRows = content.awards
+    .filter((award) => !award.featured)
     .map(
       (award) => `
         <article class="award-row"><span>${award.year}</span><div><h3>${escapeHtml(text(award.title, lang))}</h3><p>${escapeHtml(text(award.organization, lang))}</p></div></article>`,
@@ -393,24 +422,22 @@ const experiencePage = (lang) => {
   return `
     <main id="main-content">
       ${pageHeading({
-        eyebrow: copy.pageIntroExperience,
-        title: lang === "en" ? "A continuous path from ocean research to AI4S." : "从海洋数据研究到 AI4S 软件研发。",
-        intro: lang === "en"
-          ? "Work, education, research programs, and selected recognition."
-          : "这里整理了我的工作经历、教育背景、科研项目和荣誉奖励。",
-        lang,
+        title: lang === "en" ? "Experience" : "经历",
       })}
       <div class="container resume-content">
         ${section({
           label: copy.workExperience,
-          body: `<div class="section-logo"><img src="${content.person.organizationLogo.src}" alt="${escapeHtml(text(content.person.organizationLogo.alt, lang))}"></div>${timelineRows(content.journey.slice(0, 1), lang)}`,
+          body: timelineRows(content.journey.slice(0, 1), lang),
         })}
         ${section({
           label: copy.education,
-          body: `<div class="section-logo section-logo--ouc"><img src="/assets/images/ouc-logo.jpg" alt="${lang === "en" ? "Ocean University of China logo" : "中国海洋大学标识"}"></div>${timelineRows(content.journey.slice(1), lang)}`,
+          body: timelineRows(content.journey.slice(1), lang),
         })}
         ${section({ label: copy.programs, body: `<div class="program-list">${programRows}</div>` })}
-        ${section({ label: copy.recognition, body: `<div class="award-list">${awardRows}</div>` })}
+        ${section({
+          label: copy.recognition,
+          body: `<div class="featured-award-grid">${featuredAwards}</div><div class="award-list award-list--compact">${awardRows}</div><p class="earlier-recognition">${escapeHtml(text(content.earlierRecognition, lang))}</p>`,
+        })}
       </div>
     </main>`;
 };
