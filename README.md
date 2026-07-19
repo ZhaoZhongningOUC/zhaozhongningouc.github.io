@@ -6,12 +6,12 @@
 
 | 页面 | 中文（默认） | 英文 |
 | --- | --- | --- |
-| 简短主页 | `/` | `/en/` |
+| 一页简历总览 | `/` | `/en/` |
 | 当前工作与 OneScience | `/work/` | `/en/work/` |
 | 研究、论文与专利 | `/research/` | `/en/research/` |
 | 工作、教育与荣誉 | `/experience/` | `/en/experience/` |
 
-中文是默认语言。主页只保留个人介绍、当前身份、联系方式和三个内容入口，详细履历放在子页面中。原有 `/zh/` 系列地址会自动跳转到新的中文地址。
+中文是默认语言。主页以一页简历的方式汇总个人信息、工作单位与部门、最高学历、研究概览和代表性荣誉；每个摘要卡片都可继续进入对应子页面。原有 `/zh/` 系列地址会自动跳转到新的中文地址。
 
 ## 日常修改
 
@@ -41,7 +41,7 @@ node scripts/build-pages.mjs --check
 
 ## 新增论文
 
-在 `assets/js/content.js` 的 `publications` 数组中复制一项，填写年份、标题、期刊或会议、作者角色、DOI、OpenAlex 地址及引用次数。页面会自动把名称包含 `OCEANS` 的论文归入会议论文，其余归入期刊论文。
+在 `assets/js/content.js` 的 `publications` 数组中复制一项，填写年份、标题、期刊或会议、作者角色、DOI、OpenAlex 地址及引用次数。页面会自动把名称包含 `OCEANS` 的论文归入会议论文，其余归入期刊论文。主页最高学历由 `journey` 中的 `featuredOnHome: true` 决定。
 
 如果论文同时属于代表研究，请在 `selectedResearch` 中增加更完整的简介和代码链接，并确保 `fullTitle` 与 `publications` 中的标题完全一致。页面展示的是 OpenAlex 引用次数，并提供 Google Scholar 按论文题名实时检索的入口，不展示论文内部实验指标。更新引用次数时，同时修改 `citationData.updated`。
 

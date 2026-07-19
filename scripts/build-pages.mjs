@@ -160,7 +160,7 @@ const header = (page, lang) => {
     </header>`;
 };
 
-const footer = (lang) => {
+const footer = (page, lang) => {
   const copy = labels[lang];
   return `
     <footer class="site-footer">
@@ -169,7 +169,7 @@ const footer = (lang) => {
         <div class="footer-links">
           <a href="mailto:${escapeHtml(content.person.email)}">${copy.email}</a>
           <a href="https://github.com/ZhaoZhongningOUC" target="_blank" rel="noreferrer">${copy.github}</a>
-          <a href="https://gitee.com/onescience-ai/onescience" target="_blank" rel="noreferrer">OneScience</a>
+          ${page === "home" ? "" : '<a href="https://gitee.com/onescience-ai/onescience" target="_blank" rel="noreferrer">OneScience</a>'}
         </div>
       </div>
     </footer>`;
@@ -177,18 +177,22 @@ const footer = (lang) => {
 
 const homePage = (lang) => {
   const copy = labels[lang];
-  const routeLinks = content.nav
-    .filter((item) => item.page !== "home")
+  const highestEducation = content.journey.find((item) => item.featuredOnHome);
+  if (!highestEducation) throw new Error("One education entry must set featuredOnHome: true");
+  const leadAuthorTotal = content.publications.filter((paper) => paper.leadAuthor).length;
+  const researchHighlights = content.selectedResearch
+    .slice(0, 3)
     .map(
-      (item, index) => `
-        <a class="route-link" href="${pagePath(item.page, lang)}">
-          <span class="route-link__index">0${index + 1}</span>
-          <span class="route-link__copy">
-            <strong>${escapeHtml(text(item.label, lang))}</strong>
-            <small>${escapeHtml(text(item.description, lang))}</small>
-          </span>
-          <span class="route-link__arrow" aria-hidden="true">→</span>
-        </a>`,
+      (project) => `
+        <li><strong>${escapeHtml(project.title)}</strong><span>${project.year}</span></li>`,
+    )
+    .join("");
+  const recognitionHighlights = content.awards
+    .filter((award) => award.featured)
+    .slice(0, 2)
+    .map(
+      (award) => `
+        <li><strong>${escapeHtml(text(award.title, lang))}</strong><span>${award.year}</span></li>`,
     )
     .join("");
 
@@ -201,23 +205,57 @@ const homePage = (lang) => {
             <h1 id="home-title">Jonny<span aria-hidden="true">.</span></h1>
             <p class="home-headline">${escapeHtml(text(content.hero.headline, lang))}</p>
             <p class="home-summary">${escapeHtml(text(content.hero.summary, lang))}</p>
-            <div class="home-meta" aria-label="${lang === "en" ? "Current profile" : "基本信息"}">
-              <span><strong>${escapeHtml(text(content.person.organization, lang))}</strong> · OneScience</span>
-              <span><strong>${lang === "en" ? "OUC" : "中国海洋大学"}</strong> · ${lang === "en" ? "Ph.D. 2024" : "博士（2024）"}</span>
-            </div>
             <div class="home-actions">
               <a class="primary-link" href="mailto:${escapeHtml(content.person.email)}">${copy.email}<span aria-hidden="true">↗</span></a>
               ${externalLink("https://github.com/ZhaoZhongningOUC", copy.github)}
-              ${externalLink("https://gitee.com/onescience-ai/onescience", "OneScience")}
             </div>
           </div>
           <figure class="home-portrait">
             <img src="${content.person.portrait}" alt="${lang === "en" ? "Portrait of Jonny" : "Jonny 个人照片"}" width="480" height="600" fetchpriority="high">
           </figure>
         </section>
-        <nav class="route-grid" aria-label="${lang === "en" ? "Explore the résumé" : "查看详细经历"}">
-          ${routeLinks}
-        </nav>
+        <section class="home-resume" aria-labelledby="resume-overview-title">
+          <h2 class="sr-only" id="resume-overview-title">${lang === "en" ? "Résumé overview" : "简历概览"}</h2>
+          <div class="home-resume-grid">
+            <a class="home-resume-card home-resume-card--work" href="${pagePath("work", lang)}">
+              <span class="home-card-label">${lang === "en" ? "Current work" : "当前工作"}</span>
+              <div class="home-card-main">
+                <h3>${escapeHtml(text(content.person.organization, lang))}</h3>
+                <p>${escapeHtml(text(content.person.department, lang))}</p>
+              </div>
+              <span class="home-card-link">${lang === "en" ? "View work" : "查看工作经历"}<span aria-hidden="true">→</span></span>
+            </a>
+            <a class="home-resume-card home-resume-card--education" href="${pagePath("experience", lang)}#education">
+              <span class="home-card-label">${lang === "en" ? "Highest degree" : "最高学历"}</span>
+              <div class="home-card-main">
+                <h3>${escapeHtml(text(highestEducation.title, lang))}</h3>
+                <p>${escapeHtml(text(highestEducation.subtitle, lang))}</p>
+              </div>
+              <span class="home-card-link">${lang === "en" ? "View education" : "查看教育经历"}<span aria-hidden="true">→</span></span>
+            </a>
+            <a class="home-resume-card home-resume-card--research" href="${pagePath("research", lang)}">
+              <span class="home-card-label">${lang === "en" ? "Academic research" : "学术研究"}</span>
+              <div class="home-card-main">
+                <h3>${lang === "en" ? "Marine spatiotemporal intelligence and multi-source data fusion" : "海洋时空智能与多源数据融合"}</h3>
+                <dl class="home-research-stats">
+                  <div><dt>${content.publications.length}</dt><dd>${lang === "en" ? "publications" : "篇论文"}</dd></div>
+                  <div><dt>${leadAuthorTotal}</dt><dd>${lang === "en" ? "first / co-first" : "篇第一 / 共同第一作者"}</dd></div>
+                  <div><dt>${content.patents.length}</dt><dd>${lang === "en" ? "patents" : "项发明专利"}</dd></div>
+                </dl>
+                <ul class="home-highlight-list">${researchHighlights}</ul>
+              </div>
+              <span class="home-card-link">${lang === "en" ? "View research and publications" : "查看研究与论文"}<span aria-hidden="true">→</span></span>
+            </a>
+            <a class="home-resume-card home-resume-card--recognition" href="${pagePath("experience", lang)}#recognition">
+              <span class="home-card-label">${lang === "en" ? "Selected recognition" : "代表性荣誉"}</span>
+              <div class="home-card-main">
+                <h3>${lang === "en" ? "Outstanding doctoral dissertation" : "优秀博士学位论文"}</h3>
+                <ul class="home-highlight-list home-highlight-list--awards">${recognitionHighlights}</ul>
+              </div>
+              <span class="home-card-link">${lang === "en" ? "View recognition" : "查看荣誉经历"}<span aria-hidden="true">→</span></span>
+            </a>
+          </div>
+        </section>
       </div>
     </main>`;
 };
@@ -231,8 +269,8 @@ const pageHeading = ({ eyebrow = "", title, intro = "" }) => `
     </div>
   </header>`;
 
-const section = ({ label, title, body, className = "" }) => `
-  <section class="resume-section ${className}">
+const section = ({ label, title, body, className = "", id = "" }) => `
+  <section class="resume-section${className ? ` ${className}` : ""}"${id ? ` id="${escapeHtml(id)}"` : ""}>
     <h2 class="section-label">${escapeHtml(label)}</h2>
     <div class="section-body">
       ${title ? `<h3>${escapeHtml(title)}</h3>` : ""}
@@ -272,6 +310,8 @@ const workPage = (lang) => {
         ${section({
           label: copy.current,
           title: content.oneScience.title,
+          className: "panel--blue",
+          id: "current-work",
           body: `
             <div class="organization-line">
               <strong>${escapeHtml(text(content.person.organization, lang))}</strong>
@@ -285,8 +325,8 @@ const workPage = (lang) => {
               ${content.oneScience.links.map((link) => externalLink(link.url, text(link.label, lang))).join("")}
             </div>`,
         })}
-        ${section({ label: copy.focus, body: `<ol class="simple-list">${focus}</ol>` })}
-        ${section({ label: copy.domains, body: `<ul class="domain-plain-list">${domains}</ul>` })}
+        ${section({ label: copy.focus, body: `<ol class="simple-list">${focus}</ol>`, className: "panel--white" })}
+        ${section({ label: copy.domains, body: `<ul class="domain-plain-list">${domains}</ul>`, className: "panel--soft" })}
       </div>
     </main>`;
 };
@@ -361,14 +401,16 @@ const researchPage = (lang) => {
           : "研究方向围绕多源海洋数据融合、渔船轨迹重建和捕捞努力量分布预测。",
       })}
       <div class="container resume-content">
-        ${section({ label: copy.selectedResearch, body: `${researchOverview}<div class="research-list">${selectedResearch(lang)}</div>` })}
+        ${section({ label: copy.selectedResearch, body: `${researchOverview}<div class="research-list">${selectedResearch(lang)}</div>`, className: "panel--blue", id: "selected-research" })}
         ${section({
           label: copy.publications,
+          className: "panel--white",
+          id: "publications",
           body: `
             <div class="publication-group"><h3>${copy.journals} <span>${journals.length}</span></h3>${publicationRows(journals, lang)}</div>
             <div class="publication-group"><h3>${copy.conferences} <span>${conferences.length}</span></h3>${publicationRows(conferences, lang)}</div>`,
         })}
-        ${section({ label: copy.patents, body: `<div class="patent-list">${patents}</div>` })}
+        ${section({ label: copy.patents, body: `<div class="patent-list">${patents}</div>`, className: "panel--soft", id: "patents" })}
       </div>
     </main>`;
 };
@@ -428,15 +470,21 @@ const experiencePage = (lang) => {
         ${section({
           label: copy.workExperience,
           body: timelineRows(content.journey.slice(0, 1), lang),
+          className: "panel--white",
+          id: "work-experience",
         })}
         ${section({
           label: copy.education,
           body: timelineRows(content.journey.slice(1), lang),
+          className: "panel--blue",
+          id: "education",
         })}
-        ${section({ label: copy.programs, body: `<div class="program-list">${programRows}</div>` })}
+        ${section({ label: copy.programs, body: `<div class="program-list">${programRows}</div>`, className: "panel--white", id: "programs" })}
         ${section({
           label: copy.recognition,
           body: `<div class="featured-award-grid">${featuredAwards}</div><div class="award-list award-list--compact">${awardRows}</div><p class="earlier-recognition">${escapeHtml(text(content.earlierRecognition, lang))}</p>`,
+          className: "panel--soft",
+          id: "recognition",
         })}
       </div>
     </main>`;
@@ -451,8 +499,11 @@ const structuredData = (page, lang, canonical) => {
           name: "Jonny",
           url: `${siteOrigin}/`,
           image: `${siteOrigin}/assets/images/portrait.jpg`,
-          jobTitle: text(content.person.role, lang),
-          worksFor: { "@type": "Organization", name: text(content.person.organization, lang) },
+          worksFor: {
+            "@type": "Organization",
+            name: text(content.person.organization, lang),
+            department: { "@type": "Organization", name: text(content.person.department, lang) },
+          },
           alumniOf: { "@type": "CollegeOrUniversity", name: lang === "en" ? "Ocean University of China" : "中国海洋大学" },
           sameAs: ["https://github.com/ZhaoZhongningOUC"],
         }
@@ -479,7 +530,7 @@ const documentTemplate = (page, lang, body) => {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="${escapeHtml(description)}">
     <meta name="author" content="Jonny">
-    <meta name="theme-color" content="#ffffff">
+    <meta name="theme-color" content="#f5f5f7">
     <title>${escapeHtml(title)}</title>
     <link rel="canonical" href="${canonical}">
     <link rel="alternate" hreflang="en" href="${siteOrigin}${pagePath(page, "en")}">
@@ -506,7 +557,7 @@ const documentTemplate = (page, lang, body) => {
   <body data-page="${page}" data-lang="${lang}">
     ${header(page, lang)}
     ${body}
-    ${footer(lang)}
+    ${footer(page, lang)}
   </body>
 </html>
 `;

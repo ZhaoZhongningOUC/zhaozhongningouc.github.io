@@ -10,12 +10,12 @@ export const siteContent = {
   meta: {
     url: "https://zhaozhongningouc.github.io/",
     title: {
-      en: "Jonny — AI4S, Earth Systems & HPC",
-      zh: "Jonny｜AI4S、气象海洋与高性能计算",
+      en: "Jonny — Personal Résumé",
+      zh: "Jonny｜个人主页",
     },
     description: {
-      en: "Based at Sugon, coordinating OneScience development and leading Earth science R&D across weather, ocean, and heterogeneous high-performance computing.",
-      zh: "目前就职于中科曙光，从事 AI4S 与异构高性能软件研发，统筹 OneScience 研发，负责地球科学方向。",
+      en: "Sugon · High-Performance Computing Product Division. Ph.D. from Ocean University of China.",
+      zh: "目前就职于中科曙光高性能计算产品事业部，博士毕业于中国海洋大学。",
     },
     lastUpdated: "2026-07-19",
   },
@@ -30,6 +30,10 @@ export const siteContent = {
       zh: "OneScience 整体推进 · 地球科学研发",
     },
     organization: { en: "Sugon", zh: "中科曙光" },
+    department: {
+      en: "High-Performance Computing Product Division",
+      zh: "高性能计算产品事业部",
+    },
     links: [
       {
         label: { en: "GitHub", zh: "GitHub" },
@@ -46,12 +50,12 @@ export const siteContent = {
     {
       page: "home",
       label: { en: "Home", zh: "主页" },
-      description: { en: "A short introduction", zh: "个人简介与联系方式" },
+      description: { en: "Résumé overview", zh: "一页简历总览" },
     },
     {
       page: "work",
       label: { en: "Work", zh: "工作" },
-      description: { en: "OneScience and core responsibilities", zh: "OneScience 与主要工作" },
+      description: { en: "Organization and professional experience", zh: "公司、部门与工作经历" },
     },
     {
       page: "research",
@@ -67,16 +71,16 @@ export const siteContent = {
 
   hero: {
     eyebrow: {
-      en: "AI FOR SCIENCE · EARTH SYSTEMS · HPC",
-      zh: "AI4S · 气象海洋 · 高性能计算",
+      en: "AI FOR SCIENCE · HIGH-PERFORMANCE COMPUTING",
+      zh: "科学智能 · 高性能计算",
     },
     headline: {
-      en: "Building the software layer between scientific ideas and high-performance computing.",
-      zh: "把气象海洋领域的 AI 模型做成真正可用的科学软件。",
+      en: "From ocean-data research to scientific intelligence software.",
+      zh: "从海洋数据研究走向科学智能软件。",
     },
     summary: {
-      en: "Based at Sugon, working on AI for Science and heterogeneous HPC software; coordinating OneScience development and leading its Earth science track across weather and ocean models, data pipelines, and GPU/Hygon DCU deployment.",
-      zh: "目前就职于中科曙光，从事 AI4S 与异构高性能软件研发，统筹 OneScience 研发，负责地球科学方向，主要开展气象海洋模型研发、数据流程开发和 GPU、海光 DCU 平台适配。",
+      en: "Sugon · High-Performance Computing Product Division. Ph.D. from Ocean University of China.",
+      zh: "目前就职于中科曙光高性能计算产品事业部，博士毕业于中国海洋大学。",
     },
   },
 
@@ -312,6 +316,7 @@ export const siteContent = {
     },
     {
       period: { en: "2020–2024", zh: "2020–2024" },
+      featuredOnHome: true,
       title: { en: "Ph.D. · Computer Architecture", zh: "博士 · 计算机系统结构" },
       subtitle: { en: "Ocean University of China", zh: "中国海洋大学" },
       description: {
