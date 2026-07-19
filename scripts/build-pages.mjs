@@ -47,6 +47,13 @@ const pageMeta = {
     title: content.meta.title,
     description: content.meta.description,
   },
+  about: {
+    title: { en: "About — Jonny", zh: "个人介绍｜Jonny" },
+    description: {
+      en: "Ready-to-use short and extended biographies covering education, research, and current work.",
+      zh: "可直接使用的简要版与详细版个人介绍，涵盖教育经历、学术研究和主要工作。",
+    },
+  },
   work: {
     title: { en: "Work — Jonny", zh: "工作｜Jonny" },
     description: {
@@ -80,6 +87,7 @@ const labels = {
     current: "Product development",
     email: "Email",
     github: "GitHub",
+    about: "About",
     repository: "OneScience repository",
     overview: "Overview",
     role: "Core responsibilities",
@@ -105,6 +113,7 @@ const labels = {
     current: "产品研发",
     email: "邮件联系",
     github: "GitHub",
+    about: "个人介绍",
     repository: "OneScience 仓库",
     overview: "项目概览",
     role: "主要工作",
@@ -126,6 +135,11 @@ const labels = {
 const externalLink = (url, label, className = "text-link") => `
   <a class="${className}" href="${escapeHtml(url)}" target="_blank" rel="noreferrer">
     <span>${escapeHtml(label)}</span><span aria-hidden="true">↗</span>
+  </a>`;
+
+const internalLink = (url, label, className = "text-link") => `
+  <a class="${className}" href="${escapeHtml(url)}">
+    <span>${escapeHtml(label)}</span><span aria-hidden="true">→</span>
   </a>`;
 
 const googleScholarUrl = (title) =>
@@ -220,7 +234,7 @@ const homePage = (lang) => {
             <p class="home-headline">${escapeHtml(text(content.hero.headline, lang))}</p>
             <div class="home-actions">
               <a class="primary-link" href="mailto:${escapeHtml(content.person.email)}">${copy.email}<span aria-hidden="true">↗</span></a>
-              ${externalLink("https://github.com/ZhaoZhongningOUC", copy.github)}
+              ${internalLink(pagePath("about", lang), copy.about)}
             </div>
           </div>
           <figure class="home-portrait">
@@ -280,6 +294,69 @@ const homePage = (lang) => {
         linkLabel: lang === "en" ? "View recognition" : "查看荣誉经历",
         details: `<ol class="home-feature-details home-feature-list">${recognitionHighlights}</ol>`,
       })}
+    </main>`;
+};
+
+const copyButton = ({ target, label, copiedLabel, copyFailedLabel }) => `
+  <button class="copy-button" type="button" aria-controls="${escapeHtml(target)}" data-copy-target="${escapeHtml(target)}" data-copy-success="${escapeHtml(copiedLabel)}" data-copy-failure="${escapeHtml(copyFailedLabel)}">
+    <span class="copy-button__label" aria-live="polite">${escapeHtml(label)}</span><span aria-hidden="true">＋</span>
+  </button>`;
+
+const aboutPage = (lang) => {
+  const bio = content.about;
+  const detailedParagraphs = bio.detailed.paragraphs
+    .map(
+      (paragraph) => `
+        <article class="bio-paragraph">
+          <header class="bio-paragraph__heading"><span>${escapeHtml(paragraph.index)}</span><h3>${escapeHtml(text(paragraph.label, lang))}</h3></header>
+          <p data-copy-text>${escapeHtml(text(paragraph.text, lang))}</p>
+        </article>`,
+    )
+    .join("");
+
+  return `
+    <main class="about-main" id="main-content">
+      <header class="about-hero">
+        <div class="container about-hero__inner">
+          <p class="eyebrow">${escapeHtml(text(bio.eyebrow, lang))}</p>
+          <h1>${escapeHtml(text(bio.title, lang))}</h1>
+          <p>${escapeHtml(text(bio.intro, lang))}</p>
+        </div>
+      </header>
+      <section class="bio-section bio-section--brief" aria-labelledby="bio-brief-title">
+        <div class="container bio-section__inner">
+          <div class="bio-section__meta">
+            <p class="home-card-label">${escapeHtml(text(bio.brief.label, lang))}</p>
+            <h2 id="bio-brief-title">${escapeHtml(text(bio.brief.title, lang))}</h2>
+            <p>${escapeHtml(text(bio.brief.note, lang))}</p>
+            ${copyButton({
+              target: "bio-brief-copy",
+              label: text(bio.brief.copyLabel, lang),
+              copiedLabel: text(bio.brief.copiedLabel, lang),
+              copyFailedLabel: text(bio.brief.copyFailedLabel, lang),
+            })}
+          </div>
+          <div class="bio-copy bio-copy--brief" id="bio-brief-copy">
+            <p data-copy-text>${escapeHtml(text(bio.brief.text, lang))}</p>
+          </div>
+        </div>
+      </section>
+      <section class="bio-section bio-section--detailed" aria-labelledby="bio-detailed-title">
+        <div class="container bio-section__inner bio-section__inner--detailed">
+          <div class="bio-section__meta">
+            <p class="home-card-label">${escapeHtml(text(bio.detailed.label, lang))}</p>
+            <h2 id="bio-detailed-title">${escapeHtml(text(bio.detailed.title, lang))}</h2>
+            <p>${escapeHtml(text(bio.detailed.note, lang))}</p>
+            ${copyButton({
+              target: "bio-detailed-copy",
+              label: text(bio.detailed.copyLabel, lang),
+              copiedLabel: text(bio.detailed.copiedLabel, lang),
+              copyFailedLabel: text(bio.detailed.copyFailedLabel, lang),
+            })}
+          </div>
+          <div class="bio-copy bio-copy--detailed" id="bio-detailed-copy">${detailedParagraphs}</div>
+        </div>
+      </section>
     </main>`;
 };
 
@@ -553,7 +630,7 @@ const documentTemplate = (page, lang, body) => {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="${escapeHtml(description)}">
     <meta name="author" content="Jonny">
-    <meta name="theme-color" content="#f5f5f7">
+    <meta name="theme-color" content="#eef1f3">
     <title>${escapeHtml(title)}</title>
     <link rel="canonical" href="${canonical}">
     <link rel="alternate" hreflang="en" href="${siteOrigin}${pagePath(page, "en")}">
@@ -565,7 +642,7 @@ const documentTemplate = (page, lang, body) => {
     <meta property="og:url" content="${canonical}">
     <meta property="og:title" content="${escapeHtml(title)}">
     <meta property="og:description" content="${escapeHtml(description)}">
-    <meta property="og:image" content="${siteOrigin}/assets/images/og-v3.png">
+    <meta property="og:image" content="${siteOrigin}/assets/images/og-v4.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:locale" content="${lang === "en" ? "en_US" : "zh_CN"}">
@@ -573,7 +650,7 @@ const documentTemplate = (page, lang, body) => {
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="${escapeHtml(title)}">
     <meta name="twitter:description" content="${escapeHtml(description)}">
-    <meta name="twitter:image" content="${siteOrigin}/assets/images/og-v3.png">
+    <meta name="twitter:image" content="${siteOrigin}/assets/images/og-v4.png">
     <script type="application/ld+json">${structuredData(page, lang, canonical)}</script>
     <script defer src="/assets/js/main.js"></script>
   </head>
@@ -611,12 +688,13 @@ const legacyRedirectTemplate = (page) => {
 
 const renderPage = (page, lang) => {
   if (page === "home") return homePage(lang);
+  if (page === "about") return aboutPage(lang);
   if (page === "work") return workPage(lang);
   if (page === "research") return researchPage(lang);
   return experiencePage(lang);
 };
 
-const pages = ["home", "work", "research", "experience"];
+const pages = ["home", "about", "work", "research", "experience"];
 const languages = ["zh", "en"];
 const generatedFiles = new Map();
 

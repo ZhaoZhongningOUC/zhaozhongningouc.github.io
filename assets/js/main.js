@@ -33,3 +33,57 @@ document.addEventListener("click", (event) => {
 window.addEventListener("resize", () => {
   if (window.innerWidth > 760) setMenuOpen(false);
 });
+
+const fallbackCopy = (value) => {
+  const field = document.createElement("textarea");
+  field.value = value;
+  field.setAttribute("readonly", "");
+  field.style.position = "fixed";
+  field.style.opacity = "0";
+  document.body.append(field);
+  field.select();
+  const copied = document.execCommand("copy");
+  field.remove();
+  return copied;
+};
+
+document.querySelectorAll("[data-copy-target]").forEach((button) => {
+  button.addEventListener("click", async () => {
+    const target = document.getElementById(button.dataset.copyTarget);
+    const label = button.querySelector(".copy-button__label");
+    const icon = button.querySelector("[aria-hidden='true']");
+    if (!target || !label) return;
+
+    const paragraphs = [...target.querySelectorAll("[data-copy-text]")];
+    const value = (paragraphs.length ? paragraphs.map((item) => item.textContent.trim()).join("\n\n") : target.textContent.trim());
+    const originalLabel = label.textContent;
+    const originalIcon = icon?.textContent;
+
+    let copied = false;
+    try {
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(value);
+        copied = true;
+      } else {
+        copied = fallbackCopy(value);
+      }
+    } catch {
+      copied = fallbackCopy(value);
+    }
+
+    if (copied) {
+      label.textContent = button.dataset.copySuccess;
+      if (icon) icon.textContent = "✓";
+    } else {
+      label.textContent = button.dataset.copyFailure;
+      if (icon) icon.textContent = "!";
+    }
+
+    button.disabled = true;
+    window.setTimeout(() => {
+      label.textContent = originalLabel;
+      if (icon) icon.textContent = originalIcon;
+      button.disabled = false;
+    }, 1800);
+  });
+});

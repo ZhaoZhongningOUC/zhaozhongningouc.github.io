@@ -1,17 +1,21 @@
 :root {
-  --ink: #1d1d1f;
-  --ink-secondary: #6e6e73;
-  --ink-tertiary: #6e6e73;
+  --ink: #18242c;
+  --ink-secondary: #56646d;
+  --ink-tertiary: #64717a;
   --line: #d2d2d7;
   --line-soft: #e8e8ed;
   --surface: #ffffff;
-  --surface-muted: #f5f5f7;
-  --panel-blue: #eaf2ff;
-  --panel-soft: #edf1f7;
-  --panel-warm: #f7f3ed;
-  --panel-dark: #1d1d1f;
-  --blue: #0066cc;
-  --blue-hover: #004f9e;
+  --surface-muted: #eef1f3;
+  --hero-start: #fbfcfd;
+  --hero-end: #eef4f7;
+  --panel-status: #f7f9fa;
+  --panel-blue: #e5eff3;
+  --panel-work: #dde8ec;
+  --panel-soft: #eef1f2;
+  --panel-warm: #f2eee7;
+  --blue: #075f8c;
+  --blue-hover: #064b70;
+  --brand-red: #a9272d;
   --container: 1040px;
   --reading: 740px;
   --header-height: 54px;
@@ -248,6 +252,8 @@ ul {
 }
 
 .home-headline,
+.about-hero h1,
+.bio-section__meta h2,
 .page-heading h1,
 .section-body > h3,
 .publication-group > h3,
@@ -260,6 +266,9 @@ ul {
 .home-headline,
 .home-status-main strong,
 .home-feature-copy h2,
+.about-hero h1,
+.bio-section__meta h2,
+.bio-paragraph h3,
 .page-heading h1,
 .section-body > h3,
 .publication-group > h3,
@@ -269,6 +278,9 @@ ul {
 
 html[lang="zh-CN"] .home-copy h1,
 html[lang="zh-CN"] .home-headline,
+html[lang="zh-CN"] .about-hero h1,
+html[lang="zh-CN"] .bio-section__meta h2,
+html[lang="zh-CN"] .bio-paragraph h3,
 html[lang="zh-CN"] .page-heading h1,
 html[lang="zh-CN"] .section-body > h3,
 html[lang="zh-CN"] .research-row__content h3,
@@ -294,7 +306,7 @@ html[lang="zh-CN"] .patent-row h3 {
 }
 
 .home-copy h1 span {
-  color: var(--blue);
+  color: var(--brand-red);
 }
 
 .home-headline {
@@ -447,7 +459,7 @@ html[lang="zh-CN"] .home-status-main strong {
   min-height: 0;
   padding: 0;
   border-radius: 0;
-  background: linear-gradient(135deg, #ffffff 8%, #eaf2ff 100%);
+  background: linear-gradient(135deg, var(--hero-start) 8%, var(--hero-end) 100%);
 }
 
 .home-hero__inner {
@@ -460,7 +472,7 @@ html[lang="zh-CN"] .home-status-main strong {
 }
 
 .home-status-section {
-  background: var(--surface);
+  background: var(--panel-status);
 }
 
 .home-status-row {
@@ -504,8 +516,7 @@ html[lang="zh-CN"] .home-status-main strong {
 }
 
 .home-feature-section--work {
-  background: var(--panel-dark);
-  color: white;
+  background: var(--panel-work);
 }
 
 .home-feature-section--recognition {
@@ -609,15 +620,147 @@ html[lang="zh-CN"] .home-feature-list strong {
   letter-spacing: -0.01em;
 }
 
-.home-feature-section--work .home-card-label,
-.home-feature-section--work .home-feature-copy > p,
-.home-feature-section--work .home-feature-link,
-.home-feature-section--work .home-feature-list span {
-  color: rgba(255, 255, 255, 0.68);
+.about-main {
+  display: grid;
+  gap: 12px;
+  background: var(--surface-muted);
 }
 
-.home-feature-section--work .home-feature-list strong {
-  color: white;
+.about-hero {
+  background: linear-gradient(135deg, var(--hero-start), var(--hero-end));
+}
+
+.about-hero__inner {
+  padding-block: clamp(54px, 7vw, 78px);
+}
+
+.about-hero h1 {
+  max-width: 760px;
+  margin-top: 15px;
+  font-size: clamp(43px, 6vw, 64px);
+  font-weight: 620;
+  letter-spacing: -0.06em;
+  line-height: 1.02;
+}
+
+.about-hero p:last-child {
+  max-width: 710px;
+  margin-top: 20px;
+  color: var(--ink-secondary);
+  font-size: clamp(16px, 2vw, 19px);
+  line-height: 1.65;
+}
+
+.bio-section {
+  background: var(--panel-status);
+}
+
+.bio-section--detailed {
+  background: var(--panel-blue);
+}
+
+.bio-section__inner {
+  display: grid;
+  align-items: start;
+  gap: clamp(52px, 8vw, 100px);
+  grid-template-columns: minmax(190px, 0.65fr) minmax(0, 1.65fr);
+  padding-block: clamp(46px, 6vw, 68px);
+}
+
+.bio-section__meta h2 {
+  margin-top: 14px;
+  font-size: clamp(29px, 4vw, 40px);
+  font-weight: 620;
+  letter-spacing: -0.045em;
+  line-height: 1.08;
+}
+
+.bio-section__meta > p:not(.home-card-label) {
+  max-width: 330px;
+  margin-top: 14px;
+  color: var(--ink-secondary);
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.copy-button {
+  display: none;
+}
+
+.js .copy-button {
+  display: inline-flex;
+  min-height: 38px;
+  align-items: center;
+  gap: 10px;
+  margin-top: 22px;
+  padding: 8px 15px;
+  border: 1px solid rgba(24, 36, 44, 0.18);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.42);
+  color: var(--blue);
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 560;
+  transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease;
+}
+
+.copy-button:hover {
+  border-color: rgba(7, 95, 140, 0.34);
+  background: rgba(255, 255, 255, 0.72);
+  color: var(--blue-hover);
+}
+
+.copy-button:disabled {
+  cursor: default;
+}
+
+.copy-button > span:last-child {
+  font-size: 15px;
+  line-height: 1;
+}
+
+.bio-copy {
+  max-width: 760px;
+}
+
+.bio-copy--brief > p {
+  font-size: clamp(18px, 2.4vw, 22px);
+  letter-spacing: -0.022em;
+  line-height: 1.82;
+}
+
+html[lang="zh-CN"] .bio-copy--brief > p {
+  letter-spacing: -0.008em;
+}
+
+.bio-copy--detailed {
+  display: grid;
+  gap: 34px;
+}
+
+.bio-paragraph__heading {
+  display: flex;
+  align-items: baseline;
+  gap: 13px;
+}
+
+.bio-paragraph__heading > span {
+  color: var(--blue);
+  font-family: var(--font-mono);
+  font-size: 10px;
+}
+
+.bio-paragraph h3 {
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+}
+
+.bio-paragraph > p {
+  margin-top: 11px;
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.82;
 }
 
 .page-heading {
@@ -1353,6 +1496,20 @@ html[lang="zh-CN"] .home-feature-list strong {
     max-width: 690px;
   }
 
+  .about-hero__inner {
+    padding-block: 48px;
+  }
+
+  .bio-section__inner {
+    gap: 30px;
+    grid-template-columns: 1fr;
+    padding-block: 44px;
+  }
+
+  .bio-section__meta > p:not(.home-card-label) {
+    max-width: 620px;
+  }
+
   .page-heading__inner {
     padding: 30px;
     border-radius: 22px;
@@ -1437,6 +1594,38 @@ html[lang="zh-CN"] .home-feature-list strong {
 
   .home-feature-copy h2 {
     font-size: 32px;
+  }
+
+  .about-hero__inner {
+    padding-block: 38px;
+  }
+
+  .about-hero h1 {
+    font-size: 40px;
+  }
+
+  .about-hero p:last-child {
+    margin-top: 16px;
+    font-size: 16px;
+  }
+
+  .bio-section__inner {
+    gap: 26px;
+    padding-block: 36px;
+  }
+
+  .bio-copy--brief > p {
+    font-size: 18px;
+    line-height: 1.78;
+  }
+
+  .bio-copy--detailed {
+    gap: 29px;
+  }
+
+  .bio-paragraph > p {
+    font-size: 15px;
+    line-height: 1.78;
   }
 
   .home-feature-list {

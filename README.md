@@ -7,6 +7,7 @@
 | 页面 | 中文（默认） | 英文 |
 | --- | --- | --- |
 | 一页简历总览 | `/` | `/en/` |
+| 可复制的个人介绍 | `/about/` | `/en/about/` |
 | 当前工作与 OneScience | `/work/` | `/en/work/` |
 | 研究、论文与专利 | `/research/` | `/en/research/` |
 | 工作、教育与荣誉 | `/experience/` | `/en/experience/` |
@@ -19,7 +20,7 @@
 | --- | --- |
 | 姓名、简介、链接、OneScience、论文、项目、经历、奖项 | `assets/js/content.js` |
 | 版式、颜色、字号和移动端样式 | `assets/css/styles.css` |
-| 移动端菜单 | `assets/js/main.js` |
+| 移动端菜单与介绍复制按钮 | `assets/js/main.js` |
 | 页面生成结构与 SEO | `scripts/build-pages.mjs` |
 | 头像等静态图片 | `assets/images/` |
 
@@ -29,7 +30,7 @@
 node scripts/build-pages.mjs
 ```
 
-脚本会重新生成 8 个正式中英文页面、4 个旧中文地址跳转页和 `sitemap.xml`。生成后的 HTML 需要与内容文件一起提交。
+脚本会重新生成 10 个正式中英文页面、5 个旧中文地址跳转页和 `sitemap.xml`。生成后的 HTML 需要与内容文件一起提交。
 
 提交前可以检查生成结果是否与内容源一致：
 
@@ -51,7 +52,7 @@ node scripts/build-pages.mjs --check
 python3 -m http.server 8000
 ```
 
-访问 `http://localhost:8000` 查看默认中文主页，访问 `http://localhost:8000/en/` 查看英文版。原有 `http://localhost:8000/zh/` 会跳转到中文主页。页面为纯静态 HTML，关闭 JavaScript 后核心内容仍然完整；JavaScript 只负责移动端菜单。
+访问 `http://localhost:8000` 查看默认中文主页，访问 `http://localhost:8000/about/` 查看个人介绍页，访问 `http://localhost:8000/en/` 查看英文版。原有 `http://localhost:8000/zh/` 会跳转到中文主页。页面为纯静态 HTML，关闭 JavaScript 后核心内容仍然完整；JavaScript 负责移动端菜单和介绍页复制按钮。
 
 ## GitHub Pages
 

@@ -53,6 +53,11 @@ export const siteContent = {
       description: { en: "Résumé overview", zh: "一页简历总览" },
     },
     {
+      page: "about",
+      label: { en: "About", zh: "介绍" },
+      description: { en: "Short and extended biographies", zh: "可直接使用的个人介绍" },
+    },
+    {
       page: "work",
       label: { en: "Work", zh: "工作" },
       description: { en: "Organization and professional experience", zh: "公司、部门与工作经历" },
@@ -77,6 +82,67 @@ export const siteContent = {
     headline: {
       en: "From marine data research to AI for Science.",
       zh: "从海洋数据研究走向科学智能。",
+    },
+  },
+
+  about: {
+    eyebrow: { en: "PERSONAL BIO", zh: "个人介绍" },
+    title: { en: "A bio ready for the occasion.", zh: "按场合，直接使用。" },
+    intro: {
+      en: "Two ready-to-use versions: a concise paragraph for short introductions and a three-paragraph version when more context is helpful.",
+      zh: "根据使用场景准备了两种长度：简要版适合快速介绍，详细版补充教育、研究和主要工作。",
+    },
+    brief: {
+      label: { en: "Short bio", zh: "简要版" },
+      title: { en: "One-paragraph introduction", zh: "一段介绍" },
+      note: {
+        en: "For speaker profiles, event registrations, and email introductions.",
+        zh: "适合会议嘉宾简介、活动报名和邮件转发。",
+      },
+      copyLabel: { en: "Copy short bio", zh: "复制简要版" },
+      copiedLabel: { en: "Copied", zh: "已复制" },
+      copyFailedLabel: { en: "Select the text to copy", zh: "请选中文字复制" },
+      text: {
+        en: "Jonny holds a Ph.D. in Computer Architecture from Ocean University of China and works in Sugon’s High-Performance Computing Product Division. He coordinates the development of OneScience and leads its Earth science track, with a focus on AI for Science, high-performance computing, and weather and ocean applications. His doctoral dissertation received outstanding dissertation honors from both Shandong Province and Ocean University of China.",
+        zh: "Jonny，2024 年获中国海洋大学计算机系统结构博士学位，现就职于中科曙光高性能计算产品事业部，统筹 OneScience 的研发推进，并负责地球科学方向建设。研究与工作主要涉及科学智能、高性能计算及气象海洋应用，博士学位论文获评山东省优秀博士学位论文和中国海洋大学优秀博士学位论文。",
+      },
+    },
+    detailed: {
+      label: { en: "Extended bio", zh: "详细版" },
+      title: { en: "Three-paragraph introduction", zh: "三段介绍" },
+      note: {
+        en: "For project collaboration, conference materials, and contexts that need a fuller professional background.",
+        zh: "适合项目合作、会议材料和需要完整职业背景的场合；也可以按需单独选用其中一段。",
+      },
+      copyLabel: { en: "Copy extended bio", zh: "复制详细版" },
+      copiedLabel: { en: "Copied", zh: "已复制" },
+      copyFailedLabel: { en: "Select the text to copy", zh: "请选中文字复制" },
+      paragraphs: [
+        {
+          index: "01",
+          label: { en: "Education", zh: "教育经历" },
+          text: {
+            en: "Jonny completed all three degrees at Ocean University of China, earning a bachelor’s degree in Computer Science and Technology, a master’s degree in Computer Technology, and a Ph.D. in Computer Architecture in 2024. His training progressed from core computer science and software development to data-intensive research in marine applications.",
+            zh: "Jonny，本科、硕士和博士阶段均就读于中国海洋大学，先后学习计算机科学与技术、计算机技术和计算机系统结构，于 2024 年获博士学位。学习和研究方向由计算机基础与软件开发，逐步延伸到海洋数据分析和智能预测。",
+          },
+        },
+        {
+          index: "02",
+          label: { en: "Research", zh: "学术研究" },
+          text: {
+            en: "His doctoral research focused on multi-source ocean data fusion, including vessel-trajectory reconstruction and forecasting the distribution of fishing effort. He also contributed to projects supported by the National Natural Science Foundation of China. The work resulted in peer-reviewed publications and invention patents. His dissertation, “Fishing-effort distribution forecasting based on vessel monitoring system data,” was recognized as an outstanding doctoral dissertation by both Shandong Province and Ocean University of China; related work also received the Best Paper Award at the 15th China IoT Conference.",
+            zh: "博士阶段围绕多源海洋数据融合开展研究，主要关注渔船轨迹重建、捕捞努力量分布预测等问题，并参与国家自然科学基金等科研项目。相关研究形成多篇论文和发明专利，其中博士学位论文《基于船位监控系统数据的海洋捕捞强度分布预测研究》获评山东省优秀博士学位论文和中国海洋大学优秀博士学位论文；相关成果还获第十五届中国物联网学术会议最佳论文。",
+          },
+        },
+        {
+          index: "03",
+          label: { en: "Current role", zh: "主要工作" },
+          text: {
+            en: "At Sugon’s High-Performance Computing Product Division, Jonny coordinates development across OneScience, an open-source AI for Science toolkit, and leads its Earth science track. His work covers weather and ocean model engineering, scientific data pipelines, reusable tools, and deployment across GPU and Hygon DCU platforms, with the goal of turning research models into scientific software that can be reused and deployed in practice.",
+            zh: "现就职于中科曙光高性能计算产品事业部，统筹开源 AI4S 框架 OneScience 的研发安排与整体推进，并负责地球科学方向建设。主要工作包括气象海洋模型研发、科学数据处理流程与通用工具建设，以及 GPU、海光 DCU 等异构计算平台的适配和部署，推动科研模型从研究原型走向可复用、可部署的软件。",
+          },
+        },
+      ],
     },
   },
 
