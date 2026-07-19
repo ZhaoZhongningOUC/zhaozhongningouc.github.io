@@ -5,8 +5,18 @@ import { fileURLToPath } from "node:url";
 import { siteContent as content } from "../assets/js/content.js";
 
 const projectRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..");
-const siteOrigin = "https://zhaozhongningouc.github.io";
+const languages = ["zh", "en"];
+const defaultLanguage = content.routing?.defaultLanguage ?? "zh";
+const siteOrigin = content.meta.url.replace(/\/+$/, "");
 const lastModified = content.meta.lastUpdated;
+
+if (!languages.includes(defaultLanguage)) {
+  throw new Error(`routing.defaultLanguage must be one of: ${languages.join(", ")}`);
+}
+
+if (!/^https:\/\//.test(siteOrigin)) {
+  throw new Error("meta.url must be an absolute HTTPS URL");
+}
 
 if (!/^\d{4}-\d{2}-\d{2}$/.test(lastModified)) {
   throw new Error("meta.lastUpdated must use YYYY-MM-DD format");
@@ -26,8 +36,10 @@ const text = (value, lang) => {
 };
 
 const pagePath = (page, lang) => {
+  if (!languages.includes(lang)) throw new Error(`Unsupported language: ${lang}`);
   const suffix = page === "home" ? "" : `${page}/`;
-  return lang === "en" ? `/en/${suffix}` : `/${suffix}`;
+  const prefix = lang === defaultLanguage ? "" : `${lang}/`;
+  return `/${prefix}${suffix}`;
 };
 
 const pageFile = (page, lang) => {
@@ -35,12 +47,12 @@ const pageFile = (page, lang) => {
   return resolve(projectRoot, route, "index.html");
 };
 
-const legacyChinesePath = (page) => {
+const legacyDefaultPath = (page) => {
   const suffix = page === "home" ? "" : `${page}/`;
-  return `/zh/${suffix}`;
+  return `/${defaultLanguage}/${suffix}`;
 };
 
-const legacyChineseFile = (page) => resolve(projectRoot, legacyChinesePath(page).replace(/^\//, ""), "index.html");
+const legacyDefaultFile = (page) => resolve(projectRoot, legacyDefaultPath(page).replace(/^\//, ""), "index.html");
 
 const pageMeta = {
   home: {
@@ -638,7 +650,7 @@ const structuredData = (page, lang, canonical) => {
           "@type": "Person",
           name: displayName,
           alternateName,
-          url: `${siteOrigin}/`,
+          url: `${siteOrigin}${pagePath("home", defaultLanguage)}`,
           image: `${siteOrigin}${content.person.portrait}`,
           worksFor: {
             "@type": "Organization",
@@ -653,7 +665,7 @@ const structuredData = (page, lang, canonical) => {
           "@type": "ProfilePage",
           name: text(pageMeta[page].title, lang),
           url: canonical,
-          mainEntity: { "@type": "Person", name: displayName, alternateName, url: `${siteOrigin}/` },
+          mainEntity: { "@type": "Person", name: displayName, alternateName, url: `${siteOrigin}${pagePath("home", defaultLanguage)}` },
         };
   return JSON.stringify(data).replaceAll("<", "\\u003c");
 };
@@ -677,7 +689,7 @@ const documentTemplate = (page, lang, body) => {
     <link rel="canonical" href="${canonical}">
     <link rel="alternate" hreflang="en" href="${siteOrigin}${pagePath(page, "en")}">
     <link rel="alternate" hreflang="zh-CN" href="${siteOrigin}${pagePath(page, "zh")}">
-    <link rel="alternate" hreflang="x-default" href="${siteOrigin}${pagePath(page, "zh")}">
+    <link rel="alternate" hreflang="x-default" href="${siteOrigin}${pagePath(page, defaultLanguage)}">
     ${page === "home" ? `<link rel="preload" href="${content.person.portrait}" as="image" type="image/jpeg">` : ""}
     <link rel="stylesheet" href="/assets/css/styles.css">
     <meta property="og:type" content="website">
@@ -706,21 +718,23 @@ const documentTemplate = (page, lang, body) => {
 };
 
 const legacyRedirectTemplate = (page) => {
-  const targetPath = pagePath(page, "zh");
+  const targetPath = pagePath(page, defaultLanguage);
   const targetUrl = `${siteOrigin}${targetPath}`;
+  const isEnglish = defaultLanguage === "en";
 
   return `<!doctype html>
-<html lang="zh-CN">
+<html lang="${isEnglish ? "en" : "zh-CN"}">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="refresh" content="0; url=${targetPath}">
+    <meta name="robots" content="noindex">
     <link rel="canonical" href="${targetUrl}">
-    <title>页面已迁移｜赵中宁</title>
+    <title>${isEnglish ? "Page moved — Jonny Chao" : "页面已迁移｜赵中宁"}</title>
   </head>
   <body>
     <main>
-      <p>中文页面已迁移到 <a href="${targetPath}">${targetPath}</a>。</p>
+      <p>${isEnglish ? "The English page has moved to" : "中文页面已迁移到"} <a href="${targetPath}">${targetPath}</a>${isEnglish ? "." : "。"}</p>
     </main>
     <script>window.location.replace(${JSON.stringify(targetPath)} + window.location.search + window.location.hash);</script>
   </body>
@@ -737,7 +751,6 @@ const renderPage = (page, lang) => {
 };
 
 const pages = ["home", "about", "experience", "research", "work"];
-const languages = ["zh", "en"];
 const generatedFiles = new Map();
 
 for (const page of pages) {
@@ -749,7 +762,7 @@ for (const page of pages) {
 }
 
 for (const page of pages) {
-  generatedFiles.set(legacyChineseFile(page), legacyRedirectTemplate(page));
+  generatedFiles.set(legacyDefaultFile(page), legacyRedirectTemplate(page));
 }
 
 const sitemapEntries = pages
@@ -759,10 +772,10 @@ const sitemapEntries = pages
     <loc>${siteOrigin}${pagePath(page, lang)}</loc>
     <xhtml:link rel="alternate" hreflang="en" href="${siteOrigin}${pagePath(page, "en")}" />
     <xhtml:link rel="alternate" hreflang="zh-CN" href="${siteOrigin}${pagePath(page, "zh")}" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="${siteOrigin}${pagePath(page, "zh")}" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="${siteOrigin}${pagePath(page, defaultLanguage)}" />
     <lastmod>${lastModified}</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>${page === "home" ? (lang === "zh" ? "1.0" : "0.9") : "0.8"}</priority>
+    <priority>${page === "home" ? (lang === defaultLanguage ? "1.0" : "0.9") : "0.8"}</priority>
   </url>`,
     ),
   )

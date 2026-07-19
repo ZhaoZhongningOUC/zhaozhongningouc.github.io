@@ -7,6 +7,11 @@
 // assets/css/styles.css. Run the generator after changing this file.
 
 export const siteContent = {
+  // Change to "en" to publish English at / and Chinese under /zh/.
+  routing: {
+    defaultLanguage: "zh",
+  },
+
   meta: {
     url: "https://zhaozhongningouc.github.io/",
     title: {

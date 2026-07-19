@@ -2,6 +2,8 @@
 
 一个采用炭黑蓝灰主题、支持中英文且无需第三方依赖的在线简历，直接部署在 GitHub Pages。
 
+完整的工程结构、内容维护、默认语言切换、发布检查和对外分享说明见 [`AGENTS.md`](./AGENTS.md)。后续人工维护或交给其他智能体修改时，建议先阅读该文档。
+
 ## 页面结构
 
 | 页面 | 中文（默认） | 英文 |
@@ -12,7 +14,7 @@
 | 研究、论文与专利 | `/research/` | `/en/research/` |
 | 当前工作与 OneScience | `/work/` | `/en/work/` |
 
-中文是默认语言。主页以一页简历的方式汇总个人信息：工作与学历在同一条横向信息带中等权展示，学术研究、主要工作和代表荣誉分别使用全宽色块章节，并可继续进入对应子页面。原有 `/zh/` 系列地址会自动跳转到新的中文地址。
+当前以中文为默认语言。主页以一页简历的方式汇总个人信息：工作与学历在同一条横向信息带中等权展示，学术研究、主要工作和代表荣誉分别使用全宽色块章节，并可继续进入对应子页面。默认语言可在 `assets/js/content.js` 的 `routing.defaultLanguage` 中一行切换；当前 `/zh/` 系列地址会自动跳转到根路径。
 
 ## 日常修改
 
@@ -30,7 +32,7 @@
 node scripts/build-pages.mjs
 ```
 
-脚本会重新生成 10 个正式中英文页面、5 个旧中文地址跳转页和 `sitemap.xml`。生成后的 HTML 需要与内容文件一起提交。
+脚本会重新生成 10 个正式中英文页面、5 个旧默认语言前缀跳转页和 `sitemap.xml`。生成后的 HTML 需要与内容文件一起提交。
 
 提交前可以检查生成结果是否与内容源一致：
 
@@ -52,7 +54,7 @@ node scripts/build-pages.mjs --check
 python3 -m http.server 8000
 ```
 
-访问 `http://localhost:8000` 查看默认中文主页，访问 `http://localhost:8000/about/` 查看个人介绍页，访问 `http://localhost:8000/en/` 查看英文版。原有 `http://localhost:8000/zh/` 会跳转到中文主页。页面为纯静态 HTML，关闭 JavaScript 后核心内容仍然完整；JavaScript 负责移动端菜单和介绍页复制按钮。
+访问 `http://localhost:8000` 查看默认主页，访问 `http://localhost:8000/about/` 查看默认语言的个人介绍页。当前英文版位于 `http://localhost:8000/en/`，`http://localhost:8000/zh/` 会跳转到中文根路径；切换默认语言后的地址规则见 `AGENTS.md`。页面为纯静态 HTML，关闭 JavaScript 后核心内容仍然完整；JavaScript 负责移动端菜单和介绍页复制按钮。
 
 ## GitHub Pages
 
