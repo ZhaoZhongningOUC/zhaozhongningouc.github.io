@@ -439,7 +439,7 @@ const workPage = (lang) => {
             <div class="organization-line">
               <strong>${escapeHtml(text(content.person.organization, lang))}</strong>
               <span aria-hidden="true">·</span>
-              <span>${escapeHtml(text(content.oneScience.subtitle, lang))}</span>
+              <span>${escapeHtml(text(content.person.department, lang))}</span>
             </div>
             <p class="section-lead">${escapeHtml(text(content.oneScience.description, lang))}</p>
             <div class="role-block"><span>${copy.role}</span><p>${escapeHtml(text(content.oneScience.role, lang))}</p></div>
@@ -481,9 +481,9 @@ const selectedResearch = (lang) =>
             <h3>${escapeHtml(project.title)}</h3>
             <p class="research-row__title">${escapeHtml(project.fullTitle)}</p>
             <p>${escapeHtml(text(project.summary, lang))}</p>
-            ${impact ? `<a class="research-impact" href="${escapeHtml(impact.url)}" target="_blank" rel="noreferrer">${escapeHtml(impact.label)}<span aria-hidden="true">↗</span></a>` : ""}
+            ${impact ? `<span class="research-impact">${escapeHtml(impact.label)}</span>` : ""}
             <div class="section-links">
-              ${project.links.map((link) => externalLink(link.url, text(link.label, lang))).join("")}
+              ${externalLink(paper.url, lang === "en" ? "Paper" : "论文原文")}
               ${externalLink(googleScholarUrl(project.fullTitle), "Google Scholar")}
             </div>
           </div>
@@ -672,7 +672,7 @@ const documentTemplate = (page, lang, body) => {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="${escapeHtml(description)}">
     <meta name="author" content="${escapeHtml(displayName)}">
-    <meta name="theme-color" content="#18252d">
+    <meta name="theme-color" content="#0f171d">
     <title>${escapeHtml(title)}</title>
     <link rel="canonical" href="${canonical}">
     <link rel="alternate" hreflang="en" href="${siteOrigin}${pagePath(page, "en")}">

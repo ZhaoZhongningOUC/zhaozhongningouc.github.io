@@ -14,8 +14,8 @@ export const siteContent = {
       zh: "赵中宁｜个人主页",
     },
     description: {
-      en: "Sugon · High-Performance Computing Product Division. Ph.D. from Ocean University of China.",
-      zh: "目前就职于中科曙光高性能计算产品事业部，博士毕业于中国海洋大学。",
+      en: "Sugon Beijing · Strategic Applications R&D Department. Ph.D. from Ocean University of China.",
+      zh: "现就职于中科曙光北京公司战略应用研发部，博士毕业于中国海洋大学。",
     },
     lastUpdated: "2026-07-19",
   },
@@ -31,8 +31,8 @@ export const siteContent = {
     },
     organization: { en: "Sugon", zh: "中科曙光" },
     department: {
-      en: "High-Performance Computing Product Division",
-      zh: "高性能计算产品事业部",
+      en: "Beijing Company · Advanced Computing Products Division · AI for Science Applications Department · Strategic Applications R&D Department",
+      zh: "北京公司高端计算产品部 · 科学智能应用部 · 战略应用研发部",
     },
     links: [
       {
@@ -96,8 +96,8 @@ export const siteContent = {
       copiedLabel: { en: "Copied", zh: "已复制" },
       copyFailedLabel: { en: "Select the text to copy", zh: "请选中文字复制" },
       text: {
-        en: "Jonny Chao earned a Ph.D. in Computer Architecture from Ocean University of China in 2024. He works in Sugon’s High-Performance Computing Product Division, where he coordinates OneScience development and leads its Earth science track. His experience spans marine data intelligence, AI for Science, and heterogeneous high-performance computing. He has published eight papers and filed two invention patents. His doctoral dissertation received outstanding dissertation honors from both Shandong Province and Ocean University of China, while a separate collaborative study received the Best Paper Award at the 15th China IoT Conference.",
-        zh: "赵中宁，2024 年获中国海洋大学计算机系统结构博士学位，现就职于中科曙光高性能计算产品事业部，统筹 OneScience 研发，并负责地球科学方向建设。研究与工作聚焦海洋数据智能、科学智能与异构高性能计算，已发表 8 篇论文、申请 2 项发明专利。博士学位论文分别获评山东省优秀博士学位论文和中国海洋大学优秀博士学位论文，另有合作研究获第十五届中国物联网学术会议最佳论文。",
+        en: "Jonny Chao earned a Ph.D. in Computer Architecture from Ocean University of China in 2024. He works in the Strategic Applications R&D Department, part of the AI for Science Applications Department within Sugon Beijing’s Advanced Computing Products Division. He coordinates OneScience development and leads its Earth science track, with experience spanning marine data intelligence, AI for Science, and heterogeneous high-performance computing. He has published eight papers and filed two invention patents. His doctoral dissertation received outstanding dissertation honors from both Shandong Province and Ocean University of China, while a separate collaborative study received the Best Paper Award at the 15th China IoT Conference.",
+        zh: "赵中宁，2024 年获中国海洋大学计算机系统结构博士学位，现就职于中科曙光北京公司战略应用研发部（隶属高端计算产品部科学智能应用部），统筹 OneScience 研发，并负责地球科学方向建设。研究与工作聚焦海洋数据智能、科学智能与异构高性能计算，已发表 8 篇论文、申请 2 项发明专利。博士学位论文分别获评山东省优秀博士学位论文和中国海洋大学优秀博士学位论文，另有合作研究获第十五届中国物联网学术会议最佳论文。",
       },
     },
     highlights: {
@@ -124,8 +124,8 @@ export const siteContent = {
           index: "03",
           title: { en: "OneScience development", zh: "OneScience 研发" },
           text: {
-            en: "Coordinates development of the open-source AI for Science framework OneScience at Sugon and leads its Earth science track.",
-            zh: "就职于中科曙光高性能计算产品事业部，统筹开源 AI4S 框架 OneScience 的研发推进，并负责地球科学方向建设。",
+            en: "Works in Sugon Beijing’s Strategic Applications R&D Department, coordinates development of the open-source AI for Science framework OneScience, and leads its Earth science track.",
+            zh: "就职于中科曙光北京公司战略应用研发部（隶属高端计算产品部科学智能应用部），统筹开源 AI4S 框架 OneScience 的研发推进，并负责地球科学方向建设。",
           },
         },
       ],
@@ -157,8 +157,8 @@ export const siteContent = {
           index: "03",
           label: { en: "Current role", zh: "主要工作" },
           text: {
-            en: "At Sugon’s High-Performance Computing Product Division, Jonny Chao coordinates development across OneScience, an open-source AI for Science framework, and leads its Earth science track. His work covers weather and ocean model engineering, scientific data pipelines, reusable tools, OneSkills and Agent support, and deployment across GPU and Hygon DCU platforms, turning research models into software that can be reused and deployed in practice.",
-            zh: "现就职于中科曙光高性能计算产品事业部，统筹开源 AI4S 框架 OneScience 的研发安排与整体推进，并负责地球科学方向建设。主要工作包括气象海洋模型研发、科学数据处理流程与通用工具建设、OneSkills 与 Agent 支持，以及 GPU、海光 DCU 等异构计算平台的适配和部署，推动科研模型从研究原型走向可复用、可部署的软件。",
+            en: "Jonny Chao works in the Strategic Applications R&D Department, part of the AI for Science Applications Department within Sugon Beijing’s Advanced Computing Products Division. He coordinates development across OneScience, an open-source AI for Science framework, and leads its Earth science track. His work covers weather and ocean model engineering, scientific data pipelines, reusable tools, OneSkills and Agent support, and deployment across GPU and Hygon DCU platforms, turning research models into software that can be reused and deployed in practice.",
+            zh: "现就职于中科曙光北京公司战略应用研发部（隶属高端计算产品部科学智能应用部），统筹开源 AI4S 框架 OneScience 的研发安排与整体推进，并负责地球科学方向建设。主要工作包括气象海洋模型研发、科学数据处理流程与通用工具建设、OneSkills 与 Agent 支持，以及 GPU、海光 DCU 等异构计算平台的适配和部署，推动科研模型从研究原型走向可复用、可部署的软件。",
           },
         },
       ],
@@ -277,10 +277,6 @@ export const siteContent = {
         en: "Fuses historical fishing distributions, ocean hydrology, and chlorophyll data with ResNet and Transformer to forecast day-level fishing effort for the coming week.",
         zh: "融合历史捕捞努力量分布、海洋水文要素和叶绿素浓度数据，基于 ResNet 与 Transformer 预测未来一周的逐日捕捞努力量分布。",
       },
-      links: [
-        { label: { en: "Paper", zh: "论文原文" }, url: "https://doi.org/10.1007/s11160-025-09951-w" },
-        { label: { en: "Code & data", zh: "开源代码与数据" }, url: "https://github.com/ZhaoZhongningOUC/TransFish" },
-      ],
     },
     {
       year: "2024",
@@ -291,10 +287,6 @@ export const siteContent = {
         en: "Reconstructs two-hour historical vessel tracks at three-minute resolution by combining VMS records with ocean hydrological fields.",
         zh: "融合 VMS 轨迹记录与海洋水文场，将采样间隔为两小时的历史渔船轨迹重建为采样间隔三分钟的轨迹。",
       },
-      links: [
-        { label: { en: "Paper", zh: "论文原文" }, url: "https://doi.org/10.1016/j.oceaneng.2023.116588" },
-        { label: { en: "Code & samples", zh: "代码与示例数据" }, url: "https://github.com/ZhaoZhongningOUC/HiTrip" },
-      ],
     },
     {
       year: "2021",
@@ -305,10 +297,6 @@ export const siteContent = {
         en: "Introduces fishing chronology to identify a small indicator fleet whose current behavior predicts near-future fishing-effort distributions.",
         zh: "提出捕捞时序关系，并据此从船队中识别少量指示渔船，利用其当前捕捞行为预测短期捕捞努力量分布。",
       },
-      links: [
-        { label: { en: "Paper", zh: "论文原文" }, url: "https://doi.org/10.1016/j.eswa.2021.115512" },
-        { label: { en: "Code & data", zh: "开源代码与数据" }, url: "https://github.com/ZhaoZhongningOUC/EarlyBirds" },
-      ],
     },
   ],
 
@@ -430,7 +418,10 @@ export const siteContent = {
     {
       period: { en: "Now", zh: "至今" },
       title: { en: "OneScience & Earth Science R&D", zh: "OneScience 与地球科学方向研发" },
-      subtitle: { en: "Sugon", zh: "中科曙光" },
+      subtitle: {
+        en: "Sugon Beijing · Advanced Computing Products Division · AI for Science Applications Department · Strategic Applications R&D Department",
+        zh: "中科曙光 · 北京公司高端计算产品部 · 科学智能应用部 · 战略应用研发部",
+      },
       description: {
         en: "Coordinates OneScience development and leads weather and ocean model engineering, data pipelines, and heterogeneous platform deployment.",
         zh: "统筹 OneScience 研发，开展气象海洋模型研发、数据流程开发和异构计算平台适配。",

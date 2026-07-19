@@ -1,26 +1,26 @@
 :root {
-  --ink: #e8eff2;
+  --ink: #eef2f3;
   --ink-secondary: #b4c1c8;
   --ink-tertiary: #a4b5bd;
-  --line: #445761;
-  --line-soft: #34464f;
-  --surface: #22313a;
-  --surface-muted: #18252d;
-  --surface-raised: #2b3e48;
-  --hero-start: #21323b;
-  --hero-end: #274552;
-  --panel-status: #22343d;
-  --panel-blue: #203a46;
-  --panel-work: #29414b;
-  --panel-soft: #283942;
-  --panel-warm: #3a3632;
-  --blue: #8ccce4;
-  --blue-hover: #b9e6f4;
+  --line: #344851;
+  --line-soft: #283941;
+  --surface: #18242c;
+  --surface-muted: #0f171d;
+  --surface-raised: #22323b;
+  --hero-start: #121d23;
+  --hero-end: #1b2c33;
+  --panel-status: #19272e;
+  --panel-blue: #1b3039;
+  --panel-work: #223a44;
+  --panel-soft: #202f36;
+  --panel-warm: #2b302f;
+  --blue: #78c5e5;
+  --blue-hover: #a8ddf2;
   --brand-red: #d8787f;
-  --on-accent: #14232b;
-  --item-hover: #304852;
-  --header-bg: rgba(29, 43, 51, 0.9);
-  --shadow: rgba(7, 15, 20, 0.38);
+  --on-accent: #0f171d;
+  --item-hover: #294650;
+  --header-bg: rgba(15, 23, 29, 0.92);
+  --shadow: rgba(3, 8, 11, 0.48);
   --container: 1040px;
   --reading: 740px;
   --header-height: 54px;
@@ -138,7 +138,7 @@ ul {
 
 :focus-visible {
   border-radius: 4px;
-  outline: 3px solid rgba(140, 204, 228, 0.62);
+  outline: 3px solid rgba(120, 197, 229, 0.68);
   outline-offset: 3px;
 }
 
@@ -768,9 +768,9 @@ html[lang="zh-CN"] .about-hero__bio p {
   gap: 10px;
   margin-top: 22px;
   padding: 8px 15px;
-  border: 1px solid #4b6570;
+  border: 1px solid #3a5662;
   border-radius: 999px;
-  background: #2b4652;
+  background: #203640;
   color: var(--blue);
   cursor: pointer;
   font-size: 12px;
@@ -929,12 +929,12 @@ html[lang="zh-CN"] .bio-copy--brief > p {
 }
 
 .panel--blue {
-  --item-bg: #294954;
+  --item-bg: #24414b;
   background: var(--panel-blue);
 }
 
 .panel--soft {
-  --item-bg: #30434b;
+  --item-bg: #293b42;
   background: var(--panel-soft);
 }
 
@@ -981,7 +981,8 @@ html[lang="zh-CN"] .bio-copy--brief > p {
 
 .organization-line {
   display: flex;
-  align-items: center;
+  align-items: baseline;
+  flex-wrap: wrap;
   gap: 8px;
   margin-top: 12px;
   color: var(--ink-secondary);
@@ -1374,7 +1375,7 @@ html[lang="zh-CN"] .bio-copy--brief > p {
 }
 
 .featured-award--primary {
-  background: #294b5b;
+  background: #274753;
   box-shadow: none;
 }
 
@@ -1536,7 +1537,7 @@ html[lang="zh-CN"] .bio-copy--brief > p {
     padding: 10px 18px;
     border: 1px solid var(--line-soft);
     border-radius: 18px;
-    background: rgba(34, 49, 58, 0.98);
+    background: rgba(24, 36, 44, 0.98);
     box-shadow: 0 18px 55px var(--shadow);
   }
 
