@@ -180,11 +180,11 @@ const homePage = (lang) => {
   const highestEducation = content.journey.find((item) => item.featuredOnHome);
   if (!highestEducation) throw new Error("One education entry must set featuredOnHome: true");
   const leadAuthorTotal = content.publications.filter((paper) => paper.leadAuthor).length;
-  const researchHighlights = content.selectedResearch
+  const workHighlights = content.focusAreas
     .slice(0, 3)
     .map(
-      (project) => `
-        <li><strong>${escapeHtml(project.title)}</strong><span>${project.year}</span></li>`,
+      (item) => `
+        <li><strong>${escapeHtml(text(item.title, lang))}</strong><span>${escapeHtml(item.index)}</span></li>`,
     )
     .join("");
   const recognitionHighlights = content.awards
@@ -204,7 +204,6 @@ const homePage = (lang) => {
             <p class="eyebrow">${escapeHtml(text(content.hero.eyebrow, lang))}</p>
             <h1 id="home-title">Jonny<span aria-hidden="true">.</span></h1>
             <p class="home-headline">${escapeHtml(text(content.hero.headline, lang))}</p>
-            <p class="home-summary">${escapeHtml(text(content.hero.summary, lang))}</p>
             <div class="home-actions">
               <a class="primary-link" href="mailto:${escapeHtml(content.person.email)}">${copy.email}<span aria-hidden="true">↗</span></a>
               ${externalLink("https://github.com/ZhaoZhongningOUC", copy.github)}
@@ -216,40 +215,52 @@ const homePage = (lang) => {
         </section>
         <section class="home-resume" aria-labelledby="resume-overview-title">
           <h2 class="sr-only" id="resume-overview-title">${lang === "en" ? "Résumé overview" : "简历概览"}</h2>
-          <div class="home-resume-grid">
-            <a class="home-resume-card home-resume-card--work" href="${pagePath("work", lang)}">
-              <span class="home-card-label">${lang === "en" ? "Current work" : "当前工作"}</span>
-              <div class="home-card-main">
-                <h3>${escapeHtml(text(content.person.organization, lang))}</h3>
+          <div class="home-status-card">
+            <a class="home-status-item" href="${pagePath("work", lang)}">
+              <span class="home-card-label">${lang === "en" ? "Work" : "工作"}</span>
+              <div class="home-status-main">
+                <strong>${escapeHtml(text(content.person.organization, lang))}</strong>
                 <p>${escapeHtml(text(content.person.department, lang))}</p>
               </div>
-              <span class="home-card-link">${lang === "en" ? "View work" : "查看工作经历"}<span aria-hidden="true">→</span></span>
+              <span class="home-status-link">${lang === "en" ? "Work experience" : "工作经历"}<span aria-hidden="true">→</span></span>
             </a>
-            <a class="home-resume-card home-resume-card--education" href="${pagePath("experience", lang)}#education">
-              <span class="home-card-label">${lang === "en" ? "Highest degree" : "最高学历"}</span>
-              <div class="home-card-main">
-                <h3>${escapeHtml(text(highestEducation.title, lang))}</h3>
-                <p>${escapeHtml(text(highestEducation.subtitle, lang))}</p>
+            <a class="home-status-item" href="${pagePath("experience", lang)}#education">
+              <span class="home-card-label">${lang === "en" ? "Education" : "学历"}</span>
+              <div class="home-status-main">
+                <strong>${escapeHtml(text(highestEducation.subtitle, lang))}</strong>
+                <p>${escapeHtml(text(highestEducation.homeDegree, lang))}</p>
               </div>
-              <span class="home-card-link">${lang === "en" ? "View education" : "查看教育经历"}<span aria-hidden="true">→</span></span>
+              <span class="home-status-link">${lang === "en" ? "Education" : "教育经历"}<span aria-hidden="true">→</span></span>
             </a>
-            <a class="home-resume-card home-resume-card--research" href="${pagePath("research", lang)}">
-              <span class="home-card-label">${lang === "en" ? "Academic research" : "学术研究"}</span>
+          </div>
+          <div class="home-feature-grid">
+            <a class="home-feature-card home-feature-card--research" href="${pagePath("research", lang)}">
+              <span class="home-card-label">${escapeHtml(text(content.homepageFeatures.research.label, lang))}</span>
               <div class="home-card-main">
-                <h3>${lang === "en" ? "Marine spatiotemporal intelligence and multi-source data fusion" : "海洋时空智能与多源数据融合"}</h3>
+                <h3>${escapeHtml(text(content.homepageFeatures.research.title, lang))}</h3>
+                <p>${escapeHtml(text(content.homepageFeatures.research.summary, lang))}</p>
                 <dl class="home-research-stats">
                   <div><dt>${content.publications.length}</dt><dd>${lang === "en" ? "publications" : "篇论文"}</dd></div>
                   <div><dt>${leadAuthorTotal}</dt><dd>${lang === "en" ? "first / co-first" : "篇第一 / 共同第一作者"}</dd></div>
                   <div><dt>${content.patents.length}</dt><dd>${lang === "en" ? "patents" : "项发明专利"}</dd></div>
                 </dl>
-                <ul class="home-highlight-list">${researchHighlights}</ul>
               </div>
               <span class="home-card-link">${lang === "en" ? "View research and publications" : "查看研究与论文"}<span aria-hidden="true">→</span></span>
             </a>
-            <a class="home-resume-card home-resume-card--recognition" href="${pagePath("experience", lang)}#recognition">
-              <span class="home-card-label">${lang === "en" ? "Selected recognition" : "代表性荣誉"}</span>
+            <a class="home-feature-card home-feature-card--work" href="${pagePath("work", lang)}">
+              <span class="home-card-label">${escapeHtml(text(content.homepageFeatures.work.label, lang))}</span>
               <div class="home-card-main">
-                <h3>${lang === "en" ? "Outstanding doctoral dissertation" : "优秀博士学位论文"}</h3>
+                <h3>${escapeHtml(text(content.homepageFeatures.work.title, lang))}</h3>
+                <p>${escapeHtml(text(content.homepageFeatures.work.summary, lang))}</p>
+                <ul class="home-highlight-list">${workHighlights}</ul>
+              </div>
+              <span class="home-card-link">${lang === "en" ? "View OneScience and current work" : "了解 OneScience 与主要工作"}<span aria-hidden="true">→</span></span>
+            </a>
+            <a class="home-feature-card home-feature-card--recognition" href="${pagePath("experience", lang)}#recognition">
+              <span class="home-card-label">${escapeHtml(text(content.homepageFeatures.recognition.label, lang))}</span>
+              <div class="home-card-main">
+                <h3>${escapeHtml(text(content.homepageFeatures.recognition.title, lang))}</h3>
+                <p>${escapeHtml(text(content.homepageFeatures.recognition.summary, lang))}</p>
                 <ul class="home-highlight-list home-highlight-list--awards">${recognitionHighlights}</ul>
               </div>
               <span class="home-card-link">${lang === "en" ? "View recognition" : "查看荣誉经历"}<span aria-hidden="true">→</span></span>
@@ -542,7 +553,7 @@ const documentTemplate = (page, lang, body) => {
     <meta property="og:url" content="${canonical}">
     <meta property="og:title" content="${escapeHtml(title)}">
     <meta property="og:description" content="${escapeHtml(description)}">
-    <meta property="og:image" content="${siteOrigin}/assets/images/og-v2.png">
+    <meta property="og:image" content="${siteOrigin}/assets/images/og-v3.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:locale" content="${lang === "en" ? "en_US" : "zh_CN"}">
@@ -550,7 +561,7 @@ const documentTemplate = (page, lang, body) => {
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="${escapeHtml(title)}">
     <meta name="twitter:description" content="${escapeHtml(description)}">
-    <meta name="twitter:image" content="${siteOrigin}/assets/images/og-v2.png">
+    <meta name="twitter:image" content="${siteOrigin}/assets/images/og-v3.png">
     <script type="application/ld+json">${structuredData(page, lang, canonical)}</script>
     <script defer src="/assets/js/main.js"></script>
   </head>

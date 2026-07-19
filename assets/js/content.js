@@ -75,12 +75,44 @@ export const siteContent = {
       zh: "科学智能 · 高性能计算",
     },
     headline: {
-      en: "From ocean-data research to scientific intelligence software.",
-      zh: "从海洋数据研究走向科学智能软件。",
+      en: "From marine data research to AI for Science.",
+      zh: "从海洋数据研究走向科学智能。",
     },
-    summary: {
-      en: "Sugon · High-Performance Computing Product Division. Ph.D. from Ocean University of China.",
-      zh: "目前就职于中科曙光高性能计算产品事业部，博士毕业于中国海洋大学。",
+  },
+
+  homepageFeatures: {
+    research: {
+      label: { en: "Research", zh: "学术研究" },
+      title: {
+        en: "Understanding fishing activity through ocean data",
+        zh: "从海洋数据中理解捕捞活动",
+      },
+      summary: {
+        en: "Research on multi-source ocean-data fusion, vessel-trajectory reconstruction, and fishing-effort distribution forecasting.",
+        zh: "围绕多源海洋数据融合、渔船轨迹重建与捕捞努力量分布预测开展研究。",
+      },
+    },
+    work: {
+      label: { en: "Main work", zh: "主要工作" },
+      title: {
+        en: "Turning scientific models into usable software",
+        zh: "把科学模型变成可用的软件",
+      },
+      summary: {
+        en: "Coordinates development across OneScience and leads its Earth science track, bringing models, data, and tools together for weather and ocean applications.",
+        zh: "统筹 OneScience 的研发安排与推进，负责地球科学方向建设，围绕气象海洋场景组织模型、数据与工具的研发和整合。",
+      },
+    },
+    recognition: {
+      label: { en: "Recognition", zh: "代表荣誉" },
+      title: {
+        en: "Outstanding doctoral dissertation",
+        zh: "优秀博士学位论文",
+      },
+      summary: {
+        en: "The doctoral dissertation was recognized by both Shandong Province and Ocean University of China.",
+        zh: "博士学位论文获评山东省优秀博士学位论文和中国海洋大学优秀博士学位论文。",
+      },
     },
   },
 
@@ -317,6 +349,7 @@ export const siteContent = {
     {
       period: { en: "2020–2024", zh: "2020–2024" },
       featuredOnHome: true,
+      homeDegree: { en: "Ph.D. in Computer Architecture", zh: "计算机系统结构博士" },
       title: { en: "Ph.D. · Computer Architecture", zh: "博士 · 计算机系统结构" },
       subtitle: { en: "Ocean University of China", zh: "中国海洋大学" },
       description: {
