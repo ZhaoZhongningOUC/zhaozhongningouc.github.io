@@ -6,34 +6,34 @@
 
 - 线上地址：<https://zhaozhongningouc.github.io/>
 - 仓库：`ZhaoZhongningOUC/zhaozhongningouc.github.io`
-- 托管方式：GitHub Pages，从 `main` 分支根目录发布
+- 托管方式：GitHub Pages，由 `.github/workflows/deploy-pages.yml` 自动构建和发布
 - 技术形式：无框架、无第三方运行时依赖的静态 HTML、CSS 和 JavaScript
 - 支持语言：中文、英文
-- 当前默认语言：中文
+- 当前默认语言：英文
 - 页面顺序：主页、介绍、经历、研究、工作
 
 当前页面：
 
-| 页面 | 中文 | 英文 |
+| 页面 | 英文 | 中文 |
 | --- | --- | --- |
-| 主页 | `/` | `/en/` |
-| 介绍 | `/about/` | `/en/about/` |
-| 经历 | `/experience/` | `/en/experience/` |
-| 研究 | `/research/` | `/en/research/` |
-| 工作 | `/work/` | `/en/work/` |
+| 主页 | `/` | `/zh/` |
+| 介绍 | `/about/` | `/zh/about/` |
+| 经历 | `/experience/` | `/zh/experience/` |
+| 研究 | `/research/` | `/zh/research/` |
+| 工作 | `/work/` | `/zh/work/` |
 
 ## 2. 工程如何工作
 
 网站遵循以下数据流：
 
 ```text
-assets/js/content.js
+修改内容源并推送 main
         ↓
-scripts/build-pages.mjs
+GitHub Actions 运行 scripts/build-pages.mjs
         ↓
-中英文 index.html + sitemap.xml
+机器人同步中英文 HTML + sitemap.xml
         ↓
-提交并推送 main
+组装仅含公开资源的 _site 产物
         ↓
 GitHub Pages 自动发布
 ```
@@ -43,7 +43,8 @@ GitHub Pages 自动发布
 1. `assets/js/content.js` 是个人信息和中英文文案的唯一内容源。
 2. `scripts/build-pages.mjs` 负责页面结构、路由、SEO 和静态页面生成。
 3. 各目录中的 `index.html` 是自动生成结果，不要直接编辑。
-4. 修改内容源后必须重新运行生成器，并将源文件和生成文件一同提交。
+4. 本地修改时建议运行生成器用于预览和检查；如果只在 GitHub 网页修改内容源，自动工作流会生成、提交并发布页面。
+5. Pages 发布产物只包含 HTML、CSS、公开图片、`main.js`、`robots.txt` 和站点地图，不包含 `content.js`、生成脚本、README 或维护文档。
 
 ## 3. 文件地图
 
@@ -57,7 +58,7 @@ GitHub Pages 自动发布
 | `index.html`、`about/` 等 | 默认语言的生成页面 | 否 |
 | `en/` 或 `zh/` | 非默认语言页面或旧地址重定向 | 否 |
 | `sitemap.xml` | 搜索引擎站点地图 | 否 |
-| `.github/workflows/` | 自动检查生成页面 | 一般不修改 |
+| `.github/workflows/deploy-pages.yml` | 自动生成、同步并部署 GitHub Pages | 改变发布流程时修改 |
 | `.gitignore` | 阻止简历、奖状原件和原始照片被公开提交 | 谨慎修改 |
 
 ## 4. 日常修改内容
@@ -151,11 +152,11 @@ person: {
 
 ```js
 routing: {
-  defaultLanguage: "zh",
+  defaultLanguage: "en",
 },
 ```
 
-如果希望英文成为默认页面，把 `"zh"` 改为 `"en"`，然后重新生成：
+如果希望中文重新成为默认页面，把 `"en"` 改为 `"zh"`。本地可以重新生成检查；直接推送内容源时，工作流也会自动完成：
 
 ```bash
 node scripts/build-pages.mjs
@@ -205,20 +206,24 @@ python3 -m http.server 8000
 
 发布前先确认 `git status --short`，避免把简历、奖状、论文原件、临时文件或其他无关内容加入提交。
 
-基本流程：
+通过 GitHub 网页修改时，只需提交内容源，自动工作流会补齐生成文件并发布。
+
+本地修改时，建议先运行生成器；此时可以把本次源文件和相应生成结果一同提交：
 
 ```bash
-git add <本次修改的源文件和生成文件>
+git add <本次修改的源文件以及相应生成文件>
 git commit -m "简要说明本次修改"
 git push origin main
 ```
 
-推送到 `main` 后，GitHub Pages 会自动发布。随后在 GitHub Actions 中确认：
+推送到 `main` 后，`Build and deploy Pages` 工作流会依次完成：
 
-- `Verify generated pages` 成功
-- `pages build and deployment` 成功
+- 语法检查和页面生成
+- 机器人同步生成的 HTML 与 `sitemap.xml`（存在差异时）
+- 组装不含维护源码的公开产物
+- 部署到 `github-pages` 环境
 
-最后访问线上主页，并在必要时强制刷新浏览器缓存。
+确认该工作流中的 `build` 和 `deploy` 均成功后，再访问线上主页；必要时强制刷新浏览器缓存。
 
 如果交给智能体处理，可以直接说明：
 
@@ -312,7 +317,7 @@ ResearchGate 当前不公开；除非用户明确要求，不要自行添加。
 
 ### 修改后页面没有变化
 
-通常是忘记运行生成器，或浏览器仍在使用缓存：
+先确认内容修改已经推送到 `main`，再查看 `Build and deploy Pages` 是否成功。若在本地预览，重新生成：
 
 ```bash
 node scripts/build-pages.mjs
@@ -329,7 +334,7 @@ node scripts/build-pages.mjs --check
 node scripts/build-pages.mjs
 ```
 
-然后重新检查并提交生成后的 HTML。
+然后重新检查。本地提交时可以一并提交生成后的 HTML；若只提交内容源，自动工作流会在 `main` 上同步生成结果。
 
 ### 图片没有显示
 
@@ -342,7 +347,7 @@ node scripts/build-pages.mjs
 
 ### 推送成功但线上还没更新
 
-先查看 GitHub Actions。部署通常需要短暂时间；两个工作流成功后再强制刷新页面。
+先查看 GitHub Actions。等待 `Build and deploy Pages` 的 `build` 与 `deploy` 均成功后再强制刷新页面。
 
 ### 切换默认语言后路径混乱
 
@@ -357,7 +362,8 @@ node scripts/build-pages.mjs
 5. 当前引用、期刊指标、GitHub Pages 配置等易变化信息必须用官方或一手来源核验。
 6. 修改中文时优先保证中文自然；英文应独立润色。
 7. 发布前完成语法检查、页面生成检查、差异检查和隐私检查。
-8. 如果用户要求发布，推送后确认 GitHub Pages 部署成功，并报告线上地址。
+8. 不要把 `content.js`、生成脚本或维护文档加入 Pages 公开产物。
+9. 如果用户要求发布，推送后确认 `Build and deploy Pages` 成功，并报告线上地址。
 
 ## 13. 发布前清单
 

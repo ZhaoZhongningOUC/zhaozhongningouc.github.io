@@ -6,15 +6,15 @@
 
 ## 页面结构
 
-| 页面 | 中文（默认） | 英文 |
+| 页面 | 英文（默认） | 中文 |
 | --- | --- | --- |
-| 一页简历总览 | `/` | `/en/` |
-| 个人介绍与成果亮点 | `/about/` | `/en/about/` |
-| 工作、教育与荣誉 | `/experience/` | `/en/experience/` |
-| 研究、论文与专利 | `/research/` | `/en/research/` |
-| 当前工作与 OneScience | `/work/` | `/en/work/` |
+| 一页简历总览 | `/` | `/zh/` |
+| 个人介绍与成果亮点 | `/about/` | `/zh/about/` |
+| 工作、教育与荣誉 | `/experience/` | `/zh/experience/` |
+| 研究、论文与专利 | `/research/` | `/zh/research/` |
+| 当前工作与 OneScience | `/work/` | `/zh/work/` |
 
-当前以中文为默认语言。主页以一页简历的方式汇总个人信息：工作与学历在同一条横向信息带中等权展示，学术研究、主要工作和代表荣誉分别使用全宽色块章节，并可继续进入对应子页面。默认语言可在 `assets/js/content.js` 的 `routing.defaultLanguage` 中一行切换；当前 `/zh/` 系列地址会自动跳转到根路径。
+当前以英文为默认语言，右上角可切换至中文。主页以一页简历的方式汇总个人信息：工作与学历在同一条横向信息带中等权展示，学术研究、主要工作和代表荣誉分别使用全宽色块章节，并可继续进入对应子页面。默认语言由 `assets/js/content.js` 的 `routing.defaultLanguage` 控制；当前 `/en/` 系列地址会自动跳转到英文根路径。
 
 ## 日常修改
 
@@ -26,13 +26,13 @@
 | 页面生成结构与 SEO | `scripts/build-pages.mjs` |
 | 头像等静态图片 | `assets/images/` |
 
-修改 `assets/js/content.js` 后，在仓库根目录运行：
+修改 `assets/js/content.js` 后，可以在仓库根目录先做本地生成和检查：
 
 ```bash
 node scripts/build-pages.mjs
 ```
 
-脚本会重新生成 10 个正式中英文页面、5 个旧默认语言前缀跳转页和 `sitemap.xml`。生成后的 HTML 需要与内容文件一起提交。
+脚本会重新生成 10 个正式中英文页面、5 个旧默认语言前缀跳转页和 `sitemap.xml`。
 
 提交前可以检查生成结果是否与内容源一致：
 
@@ -40,7 +40,7 @@ node scripts/build-pages.mjs
 node scripts/build-pages.mjs --check
 ```
 
-仓库中的 GitHub Actions 也会自动执行这项检查，避免遗漏重新生成页面。
+推送到 `main` 后，GitHub Actions 会自动重新生成页面、用机器人提交生成结果，并直接部署 GitHub Pages。因此通过 GitHub 网页只修改 `content.js` 也可以生效，无需手工编辑或提交 HTML。
 
 ## 新增论文
 
@@ -54,17 +54,16 @@ node scripts/build-pages.mjs --check
 python3 -m http.server 8000
 ```
 
-访问 `http://localhost:8000` 查看默认主页，访问 `http://localhost:8000/about/` 查看默认语言的个人介绍页。当前英文版位于 `http://localhost:8000/en/`，`http://localhost:8000/zh/` 会跳转到中文根路径；切换默认语言后的地址规则见 `AGENTS.md`。页面为纯静态 HTML，关闭 JavaScript 后核心内容仍然完整；JavaScript 负责移动端菜单和介绍页复制按钮。
+访问 `http://localhost:8000` 查看英文主页，访问 `http://localhost:8000/about/` 查看英文个人介绍页，中文位于 `http://localhost:8000/zh/`；`http://localhost:8000/en/` 会跳转到英文根路径。页面为纯静态 HTML，关闭 JavaScript 后核心内容仍然完整；JavaScript 负责移动端菜单和介绍页复制按钮。
 
 ## GitHub Pages
 
 仓库设置：
 
-- Source：`Deploy from a branch`
-- Branch：`main`
-- Folder：`/ (root)`
+- Source：`GitHub Actions`
+- Workflow：`.github/workflows/deploy-pages.yml`
 
-推送到 `main` 后会自动更新网站。
+推送到 `main` 后，工作流会完成语法检查、页面生成、生成文件同步、精简发布产物打包和 Pages 部署。公开产物不包含 `assets/js/content.js`、生成脚本、README 或维护文档。
 
 ## 内容与隐私
 
