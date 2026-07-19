@@ -59,8 +59,8 @@
     </header>
 
     <main class="home-main" id="main-content">
-      <div class="container home-layout">
-        <section class="home-hero" aria-labelledby="home-title">
+      <section class="home-hero" aria-labelledby="home-title">
+        <div class="container home-hero__inner">
           <div class="home-copy">
             <p class="eyebrow">AI FOR SCIENCE · HIGH-PERFORMANCE COMPUTING</p>
             <h1 id="home-title">Jonny<span aria-hidden="true">.</span></h1>
@@ -76,67 +76,75 @@
           <figure class="home-portrait">
             <img src="/assets/images/portrait.jpg" alt="Portrait of Jonny" width="480" height="600" fetchpriority="high">
           </figure>
-        </section>
-        <section class="home-resume" aria-labelledby="resume-overview-title">
+        </div>
+      </section>
+      <section class="home-status-section" aria-labelledby="resume-overview-title">
+        <div class="container home-status-row">
           <h2 class="sr-only" id="resume-overview-title">Résumé overview</h2>
-          <div class="home-status-card">
-            <a class="home-status-item" href="/en/work/">
-              <span class="home-card-label">Work</span>
-              <div class="home-status-main">
-                <strong>Sugon</strong>
-                <p>High-Performance Computing Product Division</p>
-              </div>
-              <span class="home-status-link">Work experience<span aria-hidden="true">→</span></span>
-            </a>
-            <a class="home-status-item" href="/en/experience/#education">
-              <span class="home-card-label">Education</span>
-              <div class="home-status-main">
-                <strong>Ocean University of China</strong>
-                <p>Ph.D. in Computer Architecture</p>
-              </div>
-              <span class="home-status-link">Education<span aria-hidden="true">→</span></span>
-            </a>
-          </div>
-          <div class="home-feature-grid">
-            <a class="home-feature-card home-feature-card--research" href="/en/research/">
-              <span class="home-card-label">Research</span>
-              <div class="home-card-main">
-                <h3>Understanding fishing activity through ocean data</h3>
-                <p>Research on multi-source ocean-data fusion, vessel-trajectory reconstruction, and fishing-effort distribution forecasting.</p>
-                <dl class="home-research-stats">
-                  <div><dt>8</dt><dd>publications</dd></div>
-                  <div><dt>5</dt><dd>first / co-first</dd></div>
-                  <div><dt>2</dt><dd>patents</dd></div>
-                </dl>
-              </div>
-              <span class="home-card-link">View research and publications<span aria-hidden="true">→</span></span>
-            </a>
-            <a class="home-feature-card home-feature-card--work" href="/en/work/">
-              <span class="home-card-label">Main work</span>
-              <div class="home-card-main">
-                <h3>Turning scientific models into usable software</h3>
-                <p>Coordinates development across OneScience and leads its Earth science track, bringing models, data, and tools together for weather and ocean applications.</p>
-                <ul class="home-highlight-list">
+          <a class="home-status-item" href="/en/work/">
+            <span class="home-card-label">Work</span>
+            <div class="home-status-main">
+              <strong>Sugon</strong>
+              <p>High-Performance Computing Product Division</p>
+            </div>
+            <span class="home-status-link">Work experience<span aria-hidden="true">→</span></span>
+          </a>
+          <a class="home-status-item" href="/en/experience/#education">
+            <span class="home-card-label">Education</span>
+            <div class="home-status-main">
+              <strong>Ocean University of China</strong>
+              <p>Ph.D. in Computer Architecture</p>
+            </div>
+            <span class="home-status-link">Education<span aria-hidden="true">→</span></span>
+          </a>
+        </div>
+      </section>
+
+  <section class="home-feature-section home-feature-section--research">
+    <a class="container home-feature-inner" href="/en/research/">
+      <div class="home-feature-copy">
+        <span class="home-card-label">Research</span>
+        <h2>Understanding fishing activity through ocean data</h2>
+        <p>Research on multi-source ocean-data fusion, vessel-trajectory reconstruction, and fishing-effort distribution forecasting.</p>
+        <span class="home-feature-link">View research and publications<span aria-hidden="true">→</span></span>
+      </div>
+      <dl class="home-feature-details home-feature-stats">
+          <div><dt>8</dt><dd>publications</dd></div>
+          <div><dt>5</dt><dd>first / co-first</dd></div>
+          <div><dt>2</dt><dd>patents</dd></div>
+        </dl>
+    </a>
+  </section>
+
+  <section class="home-feature-section home-feature-section--work">
+    <a class="container home-feature-inner" href="/en/work/">
+      <div class="home-feature-copy">
+        <span class="home-card-label">Main work</span>
+        <h2>Turning scientific models into usable software</h2>
+        <p>Coordinates development across OneScience and leads its Earth science track, bringing models, data, and tools together for weather and ocean applications.</p>
+        <span class="home-feature-link">View OneScience and current work<span aria-hidden="true">→</span></span>
+      </div>
+      <ol class="home-feature-details home-feature-list">
         <li><strong>AI4S Platform Engineering</strong><span>01</span></li>
         <li><strong>Earth-system Intelligence</strong><span>02</span></li>
-        <li><strong>Heterogeneous HPC Software</strong><span>03</span></li></ul>
-              </div>
-              <span class="home-card-link">View OneScience and current work<span aria-hidden="true">→</span></span>
-            </a>
-            <a class="home-feature-card home-feature-card--recognition" href="/en/experience/#recognition">
-              <span class="home-card-label">Recognition</span>
-              <div class="home-card-main">
-                <h3>Outstanding doctoral dissertation</h3>
-                <p>The doctoral dissertation was recognized by both Shandong Province and Ocean University of China.</p>
-                <ul class="home-highlight-list home-highlight-list--awards">
-        <li><strong>Outstanding Doctoral Dissertation of Shandong Province</strong><span>2025</span></li>
-        <li><strong>Outstanding Doctoral Dissertation of Ocean University of China</strong><span>2025</span></li></ul>
-              </div>
-              <span class="home-card-link">View recognition<span aria-hidden="true">→</span></span>
-            </a>
-          </div>
-        </section>
+        <li><strong>Heterogeneous HPC Software</strong><span>03</span></li></ol>
+    </a>
+  </section>
+
+  <section class="home-feature-section home-feature-section--recognition">
+    <a class="container home-feature-inner" href="/en/experience/#recognition">
+      <div class="home-feature-copy">
+        <span class="home-card-label">Recognition</span>
+        <h2>Outstanding doctoral dissertation</h2>
+        <p>The doctoral dissertation was recognized by both Shandong Province and Ocean University of China.</p>
+        <span class="home-feature-link">View recognition<span aria-hidden="true">→</span></span>
       </div>
+      <ol class="home-feature-details home-feature-list">
+        <li><strong>Outstanding Doctoral Dissertation of Shandong Province</strong><span>2025</span></li>
+        <li><strong>Outstanding Doctoral Dissertation of Ocean University of China</strong><span>2025</span></li>
+        <li><strong>Best Paper · 15th China IoT Conference</strong><span>2021</span></li></ol>
+    </a>
+  </section>
     </main>
 
     <footer class="site-footer">

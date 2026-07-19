@@ -59,8 +59,8 @@
     </header>
 
     <main class="home-main" id="main-content">
-      <div class="container home-layout">
-        <section class="home-hero" aria-labelledby="home-title">
+      <section class="home-hero" aria-labelledby="home-title">
+        <div class="container home-hero__inner">
           <div class="home-copy">
             <p class="eyebrow">科学智能 · 高性能计算</p>
             <h1 id="home-title">Jonny<span aria-hidden="true">.</span></h1>
@@ -76,67 +76,75 @@
           <figure class="home-portrait">
             <img src="/assets/images/portrait.jpg" alt="Jonny 个人照片" width="480" height="600" fetchpriority="high">
           </figure>
-        </section>
-        <section class="home-resume" aria-labelledby="resume-overview-title">
+        </div>
+      </section>
+      <section class="home-status-section" aria-labelledby="resume-overview-title">
+        <div class="container home-status-row">
           <h2 class="sr-only" id="resume-overview-title">简历概览</h2>
-          <div class="home-status-card">
-            <a class="home-status-item" href="/work/">
-              <span class="home-card-label">工作</span>
-              <div class="home-status-main">
-                <strong>中科曙光</strong>
-                <p>高性能计算产品事业部</p>
-              </div>
-              <span class="home-status-link">工作经历<span aria-hidden="true">→</span></span>
-            </a>
-            <a class="home-status-item" href="/experience/#education">
-              <span class="home-card-label">学历</span>
-              <div class="home-status-main">
-                <strong>中国海洋大学</strong>
-                <p>计算机系统结构博士</p>
-              </div>
-              <span class="home-status-link">教育经历<span aria-hidden="true">→</span></span>
-            </a>
-          </div>
-          <div class="home-feature-grid">
-            <a class="home-feature-card home-feature-card--research" href="/research/">
-              <span class="home-card-label">学术研究</span>
-              <div class="home-card-main">
-                <h3>从海洋数据中理解捕捞活动</h3>
-                <p>围绕多源海洋数据融合、渔船轨迹重建与捕捞努力量分布预测开展研究。</p>
-                <dl class="home-research-stats">
-                  <div><dt>8</dt><dd>篇论文</dd></div>
-                  <div><dt>5</dt><dd>篇第一 / 共同第一作者</dd></div>
-                  <div><dt>2</dt><dd>项发明专利</dd></div>
-                </dl>
-              </div>
-              <span class="home-card-link">查看研究与论文<span aria-hidden="true">→</span></span>
-            </a>
-            <a class="home-feature-card home-feature-card--work" href="/work/">
-              <span class="home-card-label">主要工作</span>
-              <div class="home-card-main">
-                <h3>把科学模型变成可用的软件</h3>
-                <p>统筹 OneScience 的研发安排与推进，负责地球科学方向建设，围绕气象海洋场景组织模型、数据与工具的研发和整合。</p>
-                <ul class="home-highlight-list">
+          <a class="home-status-item" href="/work/">
+            <span class="home-card-label">工作</span>
+            <div class="home-status-main">
+              <strong>中科曙光</strong>
+              <p>高性能计算产品事业部</p>
+            </div>
+            <span class="home-status-link">工作经历<span aria-hidden="true">→</span></span>
+          </a>
+          <a class="home-status-item" href="/experience/#education">
+            <span class="home-card-label">学历</span>
+            <div class="home-status-main">
+              <strong>中国海洋大学</strong>
+              <p>计算机系统结构博士</p>
+            </div>
+            <span class="home-status-link">教育经历<span aria-hidden="true">→</span></span>
+          </a>
+        </div>
+      </section>
+
+  <section class="home-feature-section home-feature-section--research">
+    <a class="container home-feature-inner" href="/research/">
+      <div class="home-feature-copy">
+        <span class="home-card-label">学术研究</span>
+        <h2>从海洋数据中理解捕捞活动</h2>
+        <p>围绕多源海洋数据融合、渔船轨迹重建与捕捞努力量分布预测开展研究。</p>
+        <span class="home-feature-link">查看研究与论文<span aria-hidden="true">→</span></span>
+      </div>
+      <dl class="home-feature-details home-feature-stats">
+          <div><dt>8</dt><dd>篇论文</dd></div>
+          <div><dt>5</dt><dd>篇第一 / 共同第一作者</dd></div>
+          <div><dt>2</dt><dd>项发明专利</dd></div>
+        </dl>
+    </a>
+  </section>
+
+  <section class="home-feature-section home-feature-section--work">
+    <a class="container home-feature-inner" href="/work/">
+      <div class="home-feature-copy">
+        <span class="home-card-label">主要工作</span>
+        <h2>把科学模型变成可用的软件</h2>
+        <p>统筹 OneScience 的研发安排与推进，负责地球科学方向建设，围绕气象海洋场景组织模型、数据与工具的研发和整合。</p>
+        <span class="home-feature-link">了解 OneScience 与主要工作<span aria-hidden="true">→</span></span>
+      </div>
+      <ol class="home-feature-details home-feature-list">
         <li><strong>AI4S 平台研发</strong><span>01</span></li>
         <li><strong>气象海洋智能</strong><span>02</span></li>
-        <li><strong>异构高性能计算</strong><span>03</span></li></ul>
-              </div>
-              <span class="home-card-link">了解 OneScience 与主要工作<span aria-hidden="true">→</span></span>
-            </a>
-            <a class="home-feature-card home-feature-card--recognition" href="/experience/#recognition">
-              <span class="home-card-label">代表荣誉</span>
-              <div class="home-card-main">
-                <h3>优秀博士学位论文</h3>
-                <p>博士学位论文获评山东省优秀博士学位论文和中国海洋大学优秀博士学位论文。</p>
-                <ul class="home-highlight-list home-highlight-list--awards">
-        <li><strong>山东省优秀博士学位论文</strong><span>2025</span></li>
-        <li><strong>中国海洋大学优秀博士学位论文</strong><span>2025</span></li></ul>
-              </div>
-              <span class="home-card-link">查看荣誉经历<span aria-hidden="true">→</span></span>
-            </a>
-          </div>
-        </section>
+        <li><strong>异构高性能计算</strong><span>03</span></li></ol>
+    </a>
+  </section>
+
+  <section class="home-feature-section home-feature-section--recognition">
+    <a class="container home-feature-inner" href="/experience/#recognition">
+      <div class="home-feature-copy">
+        <span class="home-card-label">代表荣誉</span>
+        <h2>优秀博士学位论文</h2>
+        <p>博士学位论文获评山东省优秀博士学位论文和中国海洋大学优秀博士学位论文。</p>
+        <span class="home-feature-link">查看荣誉经历<span aria-hidden="true">→</span></span>
       </div>
+      <ol class="home-feature-details home-feature-list">
+        <li><strong>山东省优秀博士学位论文</strong><span>2025</span></li>
+        <li><strong>中国海洋大学优秀博士学位论文</strong><span>2025</span></li>
+        <li><strong>第十五届中国物联网学术会议最佳论文</strong><span>2021</span></li></ol>
+    </a>
+  </section>
     </main>
 
     <footer class="site-footer">

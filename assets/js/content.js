@@ -414,6 +414,7 @@ export const siteContent = {
     {
       year: "2025",
       featured: true,
+      featuredOnHome: true,
       tier: { en: "Provincial", zh: "省级" },
       title: { en: "Outstanding Doctoral Dissertation of Shandong Province", zh: "山东省优秀博士学位论文" },
       organization: { en: "Shandong Provincial Department of Education", zh: "山东省教育厅" },
@@ -425,6 +426,7 @@ export const siteContent = {
     {
       year: "2025",
       featured: true,
+      featuredOnHome: true,
       tier: { en: "University", zh: "校级" },
       title: { en: "Outstanding Doctoral Dissertation of Ocean University of China", zh: "中国海洋大学优秀博士学位论文" },
       organization: { en: "Ocean University of China", zh: "中国海洋大学" },
@@ -448,6 +450,7 @@ export const siteContent = {
     {
       year: "2021",
       featured: false,
+      featuredOnHome: true,
       title: { en: "Best Paper · 15th China IoT Conference", zh: "第十五届中国物联网学术会议最佳论文" },
       organization: { en: "CCF IoT Technical Committee", zh: "中国计算机学会物联网专业委员会" },
     },

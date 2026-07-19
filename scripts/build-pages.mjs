@@ -175,6 +175,19 @@ const footer = (page, lang) => {
     </footer>`;
 };
 
+const homeFeatureSection = ({ className, href, label, title, summary, details, linkLabel }) => `
+  <section class="home-feature-section ${className}">
+    <a class="container home-feature-inner" href="${escapeHtml(href)}">
+      <div class="home-feature-copy">
+        <span class="home-card-label">${escapeHtml(label)}</span>
+        <h2>${escapeHtml(title)}</h2>
+        <p>${escapeHtml(summary)}</p>
+        <span class="home-feature-link">${escapeHtml(linkLabel)}<span aria-hidden="true">→</span></span>
+      </div>
+      ${details}
+    </a>
+  </section>`;
+
 const homePage = (lang) => {
   const copy = labels[lang];
   const highestEducation = content.journey.find((item) => item.featuredOnHome);
@@ -188,18 +201,19 @@ const homePage = (lang) => {
     )
     .join("");
   const recognitionHighlights = content.awards
-    .filter((award) => award.featured)
-    .slice(0, 2)
+    .filter((award) => award.featuredOnHome)
     .map(
       (award) => `
         <li><strong>${escapeHtml(text(award.title, lang))}</strong><span>${award.year}</span></li>`,
     )
     .join("");
+  const recognitionCount = content.awards.filter((award) => award.featuredOnHome).length;
+  if (recognitionCount !== 3) throw new Error("Exactly three awards must set featuredOnHome: true");
 
   return `
     <main class="home-main" id="main-content">
-      <div class="container home-layout">
-        <section class="home-hero" aria-labelledby="home-title">
+      <section class="home-hero" aria-labelledby="home-title">
+        <div class="container home-hero__inner">
           <div class="home-copy">
             <p class="eyebrow">${escapeHtml(text(content.hero.eyebrow, lang))}</p>
             <h1 id="home-title">Jonny<span aria-hidden="true">.</span></h1>
@@ -212,62 +226,60 @@ const homePage = (lang) => {
           <figure class="home-portrait">
             <img src="${content.person.portrait}" alt="${lang === "en" ? "Portrait of Jonny" : "Jonny 个人照片"}" width="480" height="600" fetchpriority="high">
           </figure>
-        </section>
-        <section class="home-resume" aria-labelledby="resume-overview-title">
+        </div>
+      </section>
+      <section class="home-status-section" aria-labelledby="resume-overview-title">
+        <div class="container home-status-row">
           <h2 class="sr-only" id="resume-overview-title">${lang === "en" ? "Résumé overview" : "简历概览"}</h2>
-          <div class="home-status-card">
-            <a class="home-status-item" href="${pagePath("work", lang)}">
-              <span class="home-card-label">${lang === "en" ? "Work" : "工作"}</span>
-              <div class="home-status-main">
-                <strong>${escapeHtml(text(content.person.organization, lang))}</strong>
-                <p>${escapeHtml(text(content.person.department, lang))}</p>
-              </div>
-              <span class="home-status-link">${lang === "en" ? "Work experience" : "工作经历"}<span aria-hidden="true">→</span></span>
-            </a>
-            <a class="home-status-item" href="${pagePath("experience", lang)}#education">
-              <span class="home-card-label">${lang === "en" ? "Education" : "学历"}</span>
-              <div class="home-status-main">
-                <strong>${escapeHtml(text(highestEducation.subtitle, lang))}</strong>
-                <p>${escapeHtml(text(highestEducation.homeDegree, lang))}</p>
-              </div>
-              <span class="home-status-link">${lang === "en" ? "Education" : "教育经历"}<span aria-hidden="true">→</span></span>
-            </a>
-          </div>
-          <div class="home-feature-grid">
-            <a class="home-feature-card home-feature-card--research" href="${pagePath("research", lang)}">
-              <span class="home-card-label">${escapeHtml(text(content.homepageFeatures.research.label, lang))}</span>
-              <div class="home-card-main">
-                <h3>${escapeHtml(text(content.homepageFeatures.research.title, lang))}</h3>
-                <p>${escapeHtml(text(content.homepageFeatures.research.summary, lang))}</p>
-                <dl class="home-research-stats">
-                  <div><dt>${content.publications.length}</dt><dd>${lang === "en" ? "publications" : "篇论文"}</dd></div>
-                  <div><dt>${leadAuthorTotal}</dt><dd>${lang === "en" ? "first / co-first" : "篇第一 / 共同第一作者"}</dd></div>
-                  <div><dt>${content.patents.length}</dt><dd>${lang === "en" ? "patents" : "项发明专利"}</dd></div>
-                </dl>
-              </div>
-              <span class="home-card-link">${lang === "en" ? "View research and publications" : "查看研究与论文"}<span aria-hidden="true">→</span></span>
-            </a>
-            <a class="home-feature-card home-feature-card--work" href="${pagePath("work", lang)}">
-              <span class="home-card-label">${escapeHtml(text(content.homepageFeatures.work.label, lang))}</span>
-              <div class="home-card-main">
-                <h3>${escapeHtml(text(content.homepageFeatures.work.title, lang))}</h3>
-                <p>${escapeHtml(text(content.homepageFeatures.work.summary, lang))}</p>
-                <ul class="home-highlight-list">${workHighlights}</ul>
-              </div>
-              <span class="home-card-link">${lang === "en" ? "View OneScience and current work" : "了解 OneScience 与主要工作"}<span aria-hidden="true">→</span></span>
-            </a>
-            <a class="home-feature-card home-feature-card--recognition" href="${pagePath("experience", lang)}#recognition">
-              <span class="home-card-label">${escapeHtml(text(content.homepageFeatures.recognition.label, lang))}</span>
-              <div class="home-card-main">
-                <h3>${escapeHtml(text(content.homepageFeatures.recognition.title, lang))}</h3>
-                <p>${escapeHtml(text(content.homepageFeatures.recognition.summary, lang))}</p>
-                <ul class="home-highlight-list home-highlight-list--awards">${recognitionHighlights}</ul>
-              </div>
-              <span class="home-card-link">${lang === "en" ? "View recognition" : "查看荣誉经历"}<span aria-hidden="true">→</span></span>
-            </a>
-          </div>
-        </section>
-      </div>
+          <a class="home-status-item" href="${pagePath("work", lang)}">
+            <span class="home-card-label">${lang === "en" ? "Work" : "工作"}</span>
+            <div class="home-status-main">
+              <strong>${escapeHtml(text(content.person.organization, lang))}</strong>
+              <p>${escapeHtml(text(content.person.department, lang))}</p>
+            </div>
+            <span class="home-status-link">${lang === "en" ? "Work experience" : "工作经历"}<span aria-hidden="true">→</span></span>
+          </a>
+          <a class="home-status-item" href="${pagePath("experience", lang)}#education">
+            <span class="home-card-label">${lang === "en" ? "Education" : "学历"}</span>
+            <div class="home-status-main">
+              <strong>${escapeHtml(text(highestEducation.subtitle, lang))}</strong>
+              <p>${escapeHtml(text(highestEducation.homeDegree, lang))}</p>
+            </div>
+            <span class="home-status-link">${lang === "en" ? "Education" : "教育经历"}<span aria-hidden="true">→</span></span>
+          </a>
+        </div>
+      </section>
+      ${homeFeatureSection({
+        className: "home-feature-section--research",
+        href: pagePath("research", lang),
+        label: text(content.homepageFeatures.research.label, lang),
+        title: text(content.homepageFeatures.research.title, lang),
+        summary: text(content.homepageFeatures.research.summary, lang),
+        linkLabel: lang === "en" ? "View research and publications" : "查看研究与论文",
+        details: `<dl class="home-feature-details home-feature-stats">
+          <div><dt>${content.publications.length}</dt><dd>${lang === "en" ? "publications" : "篇论文"}</dd></div>
+          <div><dt>${leadAuthorTotal}</dt><dd>${lang === "en" ? "first / co-first" : "篇第一 / 共同第一作者"}</dd></div>
+          <div><dt>${content.patents.length}</dt><dd>${lang === "en" ? "patents" : "项发明专利"}</dd></div>
+        </dl>`,
+      })}
+      ${homeFeatureSection({
+        className: "home-feature-section--work",
+        href: pagePath("work", lang),
+        label: text(content.homepageFeatures.work.label, lang),
+        title: text(content.homepageFeatures.work.title, lang),
+        summary: text(content.homepageFeatures.work.summary, lang),
+        linkLabel: lang === "en" ? "View OneScience and current work" : "了解 OneScience 与主要工作",
+        details: `<ol class="home-feature-details home-feature-list">${workHighlights}</ol>`,
+      })}
+      ${homeFeatureSection({
+        className: "home-feature-section--recognition",
+        href: `${pagePath("experience", lang)}#recognition`,
+        label: text(content.homepageFeatures.recognition.label, lang),
+        title: text(content.homepageFeatures.recognition.title, lang),
+        summary: text(content.homepageFeatures.recognition.summary, lang),
+        linkLabel: lang === "en" ? "View recognition" : "查看荣誉经历",
+        details: `<ol class="home-feature-details home-feature-list">${recognitionHighlights}</ol>`,
+      })}
     </main>`;
 };
 
