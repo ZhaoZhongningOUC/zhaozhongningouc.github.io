@@ -102,7 +102,7 @@ export const siteContent = {
       copyFailedLabel: { en: "Select the text to copy", zh: "请选中文字复制" },
       text: {
         en: "Jonny Chao earned a Ph.D. in Computer Architecture from Ocean University of China in 2024. He works in the Strategic Applications R&D Department, part of the AI for Science Applications Department within Sugon Beijing’s Advanced Computing Products Division. He coordinates OneScience development and leads its Earth science track, with experience spanning marine data intelligence, AI for Science, and heterogeneous high-performance computing. He has published eight papers and filed two invention patents. His doctoral dissertation received outstanding dissertation honors from both Shandong Province and Ocean University of China, while a separate collaborative study received the Best Paper Award at the 15th China IoT Conference.",
-        zh: "赵中宁，2024 年获中国海洋大学计算机系统结构博士学位，现就职于中科曙光北京公司战略应用研发部（隶属高端计算产品部科学智能应用部），统筹 OneScience 研发，并负责地球科学方向建设。研究与工作聚焦海洋数据智能、科学智能与异构高性能计算，已发表 8 篇论文、申请 2 项发明专利。博士学位论文分别获评山东省优秀博士学位论文和中国海洋大学优秀博士学位论文，另有合作研究获第十五届中国物联网学术会议最佳论文。",
+        zh: "赵中宁，2024 年获中国海洋大学计算机系统结构博士学位，现就职于中科曙光北京公司战略应用研发部（隶属高端计算产品部科学智能应用部），统筹 OneScience 研发，并负责地球科学方向建设。研究与工作聚焦地球科学数据智能、科学智能与异构高性能计算，已发表 8 篇论文、申请 2 项发明专利。博士学位论文分别获评山东省优秀博士学位论文和中国海洋大学优秀博士学位论文，另有合作研究获第十五届中国物联网学术会议最佳论文。",
       },
     },
     highlights: {
